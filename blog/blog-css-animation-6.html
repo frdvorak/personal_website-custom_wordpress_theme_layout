@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+    <title>CSS Card Hover Effect</title>
+    <style>
+body {
+    background-color: white;
+    font-family: 'Verdana', cursive;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+h1 {
+    margin-top: 40px;
+    text-align: center;
+}
+.container {
+    position: relative;
+    top: 90px;
+    width: 700px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    border: 5px solid black;
+    backface-visibility: hidden;
+}
+.portrait {
+    background-size: cover;
+    top: 0;
+    width: 200px;
+    height: 295px;
+    margin: 15px;
+    position: relative;
+    transition: .3s;
+    backface-visibility: hidden;
+}
+.part {
+    border: 1px solid rgba(0,0,0,0);
+    position: absolute;
+    background-repeat: no-repeat;
+    transition: .3s;
+    backface-visibility: hidden;
+}
+.part-1 {
+    width: 60%;
+    height: 90px;
+    background-position: -50px 0;
+    background-size: 250%;
+}
+.part-2 {
+    width: 40%;
+    height: 90px;
+    top: 0;
+    left: 60%;
+    background-position: -157px 0;
+    background-size: 364%;
+}
+.part-3 {
+    width: 50%;
+    height: 210px;
+    top: 90px;
+    left: 50%;
+    background-position: -153px -94px;
+    background-size: 310%;
+}
+.part-4 {
+    width: 50%;
+    height: 100px;
+    top: 90px;
+    background-position: -53px -94px;
+    background-size: 310%;
+}
+.part-5 {
+    width: 50%;
+    height: 110px;
+    top: 190px;
+    background-position: -53px -194px;
+    background-size: 310%;
+}
+.portrait:hover {
+    top: -30px;
+}
+.portrait:hover .part {
+    border: 1px solid rgba(0,0,0,1);
+    box-shadow: 5px 2px 10px rgba(0,0,0,.8);
+}
+.portrait:hover .part-1 {
+    transform: translate(-1px, -5px);
+}
+.portrait:hover .part-2 {
+    transform: translate(5px, -5px);
+}
+.portrait:hover .part-3 {
+    transform: translate(5px, 55px);
+}
+.portrait:hover .part-4 {
+    transform: translate(-1px, 55px);
+}
+.portrait:hover .part-5 {
+    transform: translate(-1px, 60px);
+}
+.part-1:hover {
+    transform: translate(-1px, -5px) scale(2);
+}
+.text-box {
+
+}
+.text-box::before {
+
+}
+.portrait_title {
+    border: 1px solid black;
+    text-align: center;
+    font-size: 45px;
+    position: absolute;
+    top: 90px;
+    left: -5%;
+    width: 110%;
+    height: 50px;
+    line-height: 45px;
+    transform: scale(.4);
+    transform-origin: top;
+    transition: .3s;
+    box-shadow: 5px 2px 10px rgba(0,0,0,.5), inset 1px 3px 3px rgba(0,0,0,.5), inset -1px -1px 5px rgba(0,0,0,.9);
+    opacity: 0;
+    text-shadow: 1px 2px 10px black;
+}
+.portrait:hover .portrait_title {
+    transform: scale(1);
+    opacity: 1;
+}
+.portrait_subtitle {
+
+}
+.portrait:hover .part{
+
+}
+.portrait:hover .text-box::before {
+
+}
+.portrait:hover .portrait_title {
+
+}
+.portrait:hover .portrait_subtitle {
+
+}
+.portrait--1 .part {
+    background-image: url('img/animal-portrait-1.jpg')
+}
+.portrait--2 .part{
+    background-image: url('img/animal-portrait-2.jpeg')
+}
+.portrait--3 .part{
+    background-image: url('img/animal-portrait-3.jpeg')
+}
+
+    </style>
+</head>
+<body>
+        <h1>CSS Card Hover Effect</h1>
+            <div class="container">
+                <div class="portrait portrait--1">
+                    <div class="part part-1"></div>
+                    <div class="part part-2"></div>
+                    <div class="part part-3"></div>
+                    <div class="part part-4"></div>
+                    <div class="part part-5"></div>
+                    <span class="portrait_title">Title 1</span>
+                </div>
+                <div class="portrait portrait--2">
+                    <div class="part part-1"></div>
+                    <div class="part part-2"></div>
+                    <div class="part part-3"></div>
+                    <div class="part part-4"></div>
+                    <div class="part part-5"></div>
+                    <span class="portrait_title">Title 2</span>
+                </div>
+                <div class="portrait portrait--3">
+                    <div class="part part-1"></div>
+                    <div class="part part-2"></div>
+                    <div class="part part-3"></div>
+                    <div class="part part-4"></div>
+                    <div class="part part-5"></div>
+                    <span class="portrait_title">Title 3</span>
+                </div>
+                
+            </div>
+</body>
+</html>

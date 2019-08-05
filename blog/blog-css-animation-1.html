@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>"Social media buttons animation with pure CSS" series 1/6</title>
+    <style>
+        xmp {
+            display: inline-block;
+            background-color: lightgray;
+            padding: 2px 5px;
+            font-family: "Lucida Console", Monaco, monospace;
+        }
+        .block {
+            display: block;
+        }
+        .code {
+            background-color: lightgray;
+            padding: 2px 5px;
+            font-family: "Lucida Console", Monaco, monospace;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        .about {
+            display: block;
+            border-radius: 10px;
+            border: 2px solid black;
+            padding: 10px;
+            width: 50%;
+            margin: 15px auto;
+        }
+        .center {
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        .centered {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+        }
+        .final {
+            position: relative;
+            margin: 50px auto;
+            width: 200px;
+            height: 200px;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto auto;
+            grid-gap: 10px;
+            border: 2px solid lightgray;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .button {
+            display: block;
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+        .button::before {
+            content: "";
+            left: 0px;
+            top: 50px;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #3C5A99;
+            border-radius: 100%;
+            transition: .15s ease-in;
+        }
+        .button:nth-of-type(2)::before {
+            background-color: #c32aa3;
+        }
+        .button:nth-of-type(3)::before {
+            background-color: #ff0000;
+        }
+        .button:nth-of-type(4)::before {
+            background-color: #007bb5;
+        }
+        .button:nth-of-type(5)::before {
+            background-color: #db4437;
+        }
+        .button:nth-of-type(6)::before {
+            background-color: #1da1f2;
+        }
+        .button:nth-of-type(7)::before {
+            background-color: #bd081c;
+        }
+        .button:nth-of-type(8)::before {
+            background-color: #25d366;
+        }
+        .button:nth-of-type(9)::before {
+            background-color: #6441a4;
+        }
+        .button::after {
+            content: "";
+            position: absolute;
+            left: 60px;
+            top: 0px;
+            width: 45px;
+            height: 45px;
+            background-color: white;
+            border-radius: 100%;
+            transition: .25s cubic-bezier(.14,1.88,.3,.76);
+        }
+        /*
+        .button:nth-of-type(2)::after {
+            background-color: #fc35d3;
+        }
+        .button:nth-of-type(3)::after {
+            background-color: rgba(255,255,255,.6);
+        }
+        .button:nth-of-type(4)::after {
+            background-color: #00a8f7;
+        }
+        .button:nth-of-type(5)::after {
+            background-color: #ff5647;
+        }
+        .button:nth-of-type(6)::after {
+            background-color: #85d0ff;
+        }
+        .button:nth-of-type(7)::after {
+            background-color: #ff2e45;
+        }
+        .button:nth-of-type(8)::after {
+            background-color: #199c4a;
+        }
+        .button:nth-of-type(9)::after {
+            background-color: #c09eff;
+        }*/
+        .button:hover::before {
+            left: 0px;
+            top: 0px;
+            width: 50px;
+            height: 50px;
+        }
+        .button:hover::after {
+            left: 10px;
+            top: -2px;
+            width: 45px;
+            height: 45px;
+            transition-delay: .2s;
+        }
+        i {
+            font-size: 30px;
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #3C5A99;
+            z-index: 10;
+            transition: .2s;
+        }
+        .fa-instagram {
+            color: #c32aa3;
+        }
+        .fa-youtube {
+            color: #ff0000;
+        }
+        .fa-linkedin-in {
+            color:007bb5;
+        }
+        .fa-google-plus-g {
+            color:#db4437;
+        }
+        .fa-twitter {
+            color:#1da1f2;
+        }
+        .fa-pinterest-p {
+            color: #bd081c;
+        }
+        .fa-whatsapp {
+            color: #25d366;
+        }
+        .twitch {
+            color: #6441a4;
+        }
+    </style>
+</head>
+<body>
+    <div class="css-animation-1">
+
+        <h1>"Social media buttons animation with pure CSS" series 1/6</h1>
+        <p>In this series I will show you how to create few of my favourite CSS button animations. Each guide will contain simple step by step process and I will highlight new less known CSS properties as we use them.</p>
+        <p>Difficulty: beginner</p>
+    
+        <p class="centered">Final result (hover over buttons):</p>
+        <div class="css-animation-1">
+            <div class="final">
+               <div class="button"><i class="fab fa-facebook-f"></i></div>
+               <div class="button"><i class="fab fa-instagram"></i></div>
+               <div class="button"><i class="fab fa-youtube"></i></div>
+               <div class="button"><i class="fab fa-linkedin-in"></i></div>
+               <div class="button"><i class="fab fa-google-plus-g"></i></div>
+               <div class="button"><i class="fab fa-twitter"></i></div>
+               <div class="button"><i class="fab fa-pinterest-p"></i></div>
+               <div class="button"><i class="fab fa-whatsapp"></i></div>
+               <div class="button"><i class="fab fa-twitch"></i></div>
+            </div>
+        </div>
+        <ol>
+            <li>To display SVG icons we will be using <a href="https://fontawesome.com/icons?d=gallery" target="blank">Font Awesome</a>. Link Font Awesome CDN in the document head. You can Google the latest version or find the link <a href="https://cdnjs.com/libraries/font-awesome">here</a>. It should look something linke this: <xmp><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet"></xmp></li>
+            <li>Choose your icon <a href="https://fontawesome.com/icons" target="blank">here</a> and use it in HTML markup like so: <xmp><div class="button"><i class="fab fa-facebook-f"></i></div></xmp>.
+            <li>Now we will make use of so called "psedo elements" to create additional bubbles we can later animate. First create <span class="code">.button::before</span> element, give it <span class="code">background-color: #3C5A99;</span> and position it directly over the button. Also add <span class="code">i { z-index: 10; }</span> to move it in front of other elements. 
+            <div class="about">Note that <strong>z-index</strong> only works on positioned elements. In this case we used <span class="code">position: absolute;</span></div>
+            Your CSS at this stage:<br>
+            <xmp class="block">                
+                .button {
+                        display: block;
+                        position: relative;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 100%;
+                    }
+                    .button::before {
+                        content: ";
+                        left: 0px;
+                        top: 0px;
+                        position: absolute;
+                        width: 50px;
+                        height: 50px;
+                        background-color: #3C5A99;
+                        border-radius: 100%;
+                    }
+                    i {
+                        font-size: 30px;
+                        position: absolute;
+                        top: 50%; 
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        color: white;
+                        z-index: 10;
+                    }
+            </xmp>
+            <p class="centered">Result should look like this:<br> <img src="step-6.jpg"></p>
+            <div class="about"><strong>::before and ::after</strong> pseudo elements basically create empty HTML element entirely in CSS. We can attach styles to it, without the need to actually create that element in our HTML markup. This is often used for animations. It has a mandatory <span class="code">content: ";</span> attribute.</div>
+            
+            <p>Notice how we centered Facebook icon in the middle of our <span class="code">.button</span>, using: <span class="code">i { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }</span> This code is commonly used for horizontal and vertical centering of absolutely positioned elements, keep in mind that for this to work, <strong>you need to set position property on the parent as well.</strong> </p></li>
+            <li>Now we create <span class="code">::after</span> pseudo element on our button class and position is outside of the button element, you can see the result on the image below:<br> 
+                <xmp class="block">
+                    .button::after {
+                        content: "";
+                        position: absolute;
+                        left: 60px;
+                        top: 0px;
+                        width: 45px;
+                        height: 45px;
+                        background-color: #6092fc;
+                        border-radius: 100%;
+                    }
+                </xmp>
+                
+            </li>
+            <img src="step-7.jpg">
+            <li>Position <span class="code">::before</span> element outside of the button and make it smaller and change text color on "i" element <span class="code">i { color: #3C5A99; }</span> to make Facebook icon visible on white background.<br>
+                <xmp class="block">
+                        .button::before {
+                            content: "";
+                            left: -50px;
+                            top: 50px;
+                            position: absolute;
+                            width: 10px;
+                            height: 10px;
+                        }
+                </xmp><br>
+            Now we have two "bubbles" created by <span class="code">::before</span> and <span class="code">::after</span> pseudo elements positioned just outside of borders of our button: 
+            </li>
+            <img src="step-9.jpg">
+            <li>We will animate using CSS3 Transition property. Add <span class="code">.button::before { transition: .15s ease-in }</span> and <span class="code">.button::after { transition: .25s cubic-bezier(.14,1.88,.3,.76); }</span>
+             </li>
+             <div class="about"><strong>Cubic-bezier</strong> function allows us to create custom animation timing. Great website to experiment and create custom cubic-beziers is <a href="https://cubic-bezier.com/#.17,.67,.83,.67">here</a>. You can also use pre-set values <span class="code">ease-in, ease-out, linear</span> etc.</div>
+            <li>Now we add hover effect that changes position and size of ::before and ::after pseudo elements when user hovers over their parent. Notice the slightly unusual syntax on CSS selector <span class="code">.button:hover::before</span>:<br>
+                <xmp  class="block">
+                        .button:hover::before {
+                            left: 0px;
+                            top: 0px;
+                            width: 50px;
+                            height: 50px;
+                        }
+                        .button:hover::after {
+                            left: 10px;
+                            top: -2px;
+                            width: 45px;
+                            height: 45px;
+                            transition-delay: .2s;
+                        }
+                </xmp>
+            </li>
+            <li>Add <span class="code">.button:hover::after { transition-delay: .2s; }</span>. Make sure you add transition-delay only on hovered element and not on ::after element itself, this is important for how the animation plays on mouse exit. </li>
+            <li>Now finally hide everything outside of our button element <span class="code">.button { overflow:hidden }</span> and change color of ::after element to white <span class="code">.button::after { background-color: white; }</span>, I only gave it colour to show you what"s happening behind the scenes</li>
+        </ol>
+            <p class="centered">Good job!</p>
+            <div class="center">
+                <div class="button center"><i class="fab fa-facebook-f"></i></div>
+             </div>
+            <p>Final HTML:<xmp  class="block">
+            <div class="button"><i class="fab fa-facebook-f"></i></div>
+            </xmp></p>
+            <p>Final CSS:
+                <xmp  class="block">
+                    .button {
+                        display: block;
+                        position: relative;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 100%;
+                        overflow: hidden;
+                    }
+                    .button::before {
+                        content: "";
+                        left: 0px;
+                        top: 50px;
+                        position: absolute;
+                        width: 10px;
+                        height: 10px;
+                        background-color: #3C5A99;
+                        border-radius: 100%;
+                        transition: .15s ease-in;
+                    }
+                    .button::after {
+                        content: "";
+                        position: absolute;
+                        left: 60px;
+                        top: 0px;
+                        width: 45px;
+                        height: 45px;
+                        background-color: white;
+                        border-radius: 100%;
+                        transition: .25s cubic-bezier(.14,1.88,.3,.76);
+                    }
+                    .button:hover::before {
+                        left: 0px;
+                        top: 0px;
+                        width: 50px;
+                        height: 50px;
+                    }
+                    .button:hover::after {
+                        left: 10px;
+                        top: -2px;
+                        width: 45px;
+                        height: 45px;
+                        transition-delay: .2s;
+                    }
+                    i {
+                        font-size: 30px;
+                        position: absolute;
+                        top: 50%; 
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        color: #3C5A99;
+                        z-index: 10;
+                }</xmp></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,700|Londrina+Shadow|Shadows+Into+Light|Special+Elite&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <title>Clip path animations</title>
+    <style>
+        xmp {
+            display: inline-block;
+            background-color: lightgray;
+            padding: 2px 5px;
+            font-family: "Lucida Console", Monaco, monospace;
+        }
+        body {
+            background-color: var(--color-1);        }
+        .block {
+            display: block;
+        }
+        .code {
+            background-color: lightgray;
+            padding: 2px 5px;
+            font-family: "Lucida Console", Monaco, monospace;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        .about {
+            display: block;
+            border-radius: 10px;
+            border: 2px solid black;
+            padding: 10px;
+            width: 50%;
+            margin: 15px auto;
+        }
+        .social {
+            position: relative;
+            margin: 50px auto;
+            width: 200px;
+            display: block;
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto auto;
+            border-radius: 100%;
+            backface-visibility: hidden;
+        }
+        .social > div {
+            position: relative;
+            top: 0; left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .social > div:nth-of-type(1) {
+            margin-bottom: -15px;
+        }
+        .social > div:nth-of-type(3) {
+            margin-top: -15px;
+        }
+        .social > div:nth-of-type(3) {
+            position: relative;
+            top: 0; left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        
+
+        .button {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+        }
+        .button::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%; left: 50%; 
+            width: 96%;
+            height: 96%;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background-color: black;
+            transition: .2s;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .button::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%; left: 50%; 
+            width: 85%;
+            height: 85%;
+            clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%);
+            background-color: rgba(255,255,255,.2);
+            transition: .2s;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .social:hover .button:not(:hover)::before,
+        .social:hover .button:not(:hover)::after
+        {
+            transform: translate(-50%, -50%) scale(.85);
+        }
+        .button:hover::after,
+        .button:hover::before {
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+        i {
+            font-size: 30px;
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            z-index: 10;
+            transition: .2s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="css-animation-1">
+
+        <h1>Clip path + not selector effect</h1>
+        <p>This time I will show you how to use clip-path property for creating shapes in CSS</p>
+    
+        <p>Final result (hover over buttons):</p>
+            <div class="social">
+                <div>
+                    <a href="/"><div class="button"><i class="fab fa-facebook-f"></i></div></a>
+                    <a href="/"><div class="button"><i class="fab fa-instagram"></i></div></a>
+                </div>
+               <div>
+                    <a href="/"><div class="button"><i class="fab fa-youtube"></i></div></a>
+                    <a href="/"><div class="button"><i class="fab fa-linkedin-in"></i></div></a>
+                    <a href="/"><div class="button"><i class="fab fa-google-plus-g"></i></div></a>
+               </div>
+               <div>
+                    <a href="/"><div class="button"><i class="fab fa-twitter"></i></div></a>
+                    <a href="/"><div class="button"><i class="fab fa-pinterest-p"></i></div></a>
+               </div>
+               
+            </div>
+        </div>
+        <li>1) Link <a href="https://fontawesome.com/icons?d=gallery" target="blank">Font Awesome</a> CDN in the document head. </li>
+        <xmp><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet"></xmp>
+        <li>2) Create basic markup for our grid:
+        <xmp>
+<div class="social">
+    <div>
+        <a href="/"><div class="button"><i class="fab fa-facebook-f"></i></div></a>
+        <a href="/"><div class="button"><i class="fab fa-instagram"></i></div></a>
+    </div>
+    <div>
+        <a href="/"><div class="button"><i class="fab fa-youtube"></i></div></a>
+        <a href="/"><div class="button"><i class="fab fa-linkedin-in"></i></div></a>
+        <a href="/"><div class="button"><i class="fab fa-google-plus-g"></i></div></a>
+    </div>
+    <div>
+        <a href="/"><div class="button"><i class="fab fa-twitter"></i></div></a>
+        <a href="/"><div class="button"><i class="fab fa-pinterest-p"></i></div></a>
+    </div>
+</div>
+        </xmp>
+        <li>3) We will be using clip-path property which unfortunately is not supported by Microsoft IE or Edge browser at the time of writing. If you're interested in current browser support visit <a href="https://caniuse.com/#feat=css-clip-path">caniuse.com/clip-path</a>
+            <span class="about">The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path" target='blank'><strong>clip-path</strong></a> CSS property creates a clipping region that sets what part of an element should be shown. Parts that are inside the region are shown, while those outside are hidden. There is a great online tool at  <a href="https://bennettfeely.com/clippy/" target='blank'>https://bennettfeely.com/clippy/</a> which allows you create and modify different shapes in CSS using clip-path.  </span>
+        Now that we know what clip-path is we can style our grid:
+        </li>
+        <xmp>
+.social {
+    position: relative;
+    margin: 50px auto;
+    width: 200px;
+    display: block;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    border-radius: 100%;
+}
+ .social > div {
+    position: relative;
+    top: 0; left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.social > div:nth-of-type(1) {
+    margin-bottom: -15px;
+}
+.social > div:nth-of-type(3) {
+    margin-top: -15px;
+}
+.social > div:nth-of-type(3) {
+    position: relative;
+    top: 0; left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+.button::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%; left: 50%; 
+    width: 96%;
+    height: 96%;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background-color: black;
+    transition: .2s;
+    transform: translate(-50%, -50%) scale(1);
+}
+i {
+    font-size: 30px;
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 10;
+    transition: .2s;
+}
+        </xmp>
+        <li><p>4) Add <span class="code">::after</span> element to create inset shadow effect on half of our polygon shape. I used free tools at <a href="https://bennettfeely.com/clippy/" target='blank'>https://bennettfeely.com/clippy/</a> to create custom clip-path shape.</p></li>
+        <xmp>
+.button::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%; left: 50%; 
+    width: 85%;
+    height: 85%;
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%);
+    background-color: rgba(255,255,255,.2);
+    transition: .2s;
+    transform: translate(-50%, -50%) scale(1);
+}
+        </xmp>
+</body>
+</html>
