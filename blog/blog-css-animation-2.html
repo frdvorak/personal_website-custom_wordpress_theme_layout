@@ -11,7 +11,7 @@
     <title>Liquid effect with CSS animations and SVG filters</title>
     <style>
 body {
-    background-color: #2E323C;
+    background-color: white;
 }
         xmp {
 
@@ -41,14 +41,16 @@ body {
         }
         .final {
             position: relative;
-            margin: 50px auto;
+            margin: 600px auto;
+
+            transform: scale(3);
             width: 220px;
             height: 220px;
             display: grid;
             grid-template-columns: auto auto auto;
             grid-template-rows: auto auto auto;
             grid-gap: 10px;
-            border: 1px solid black;
+
             border-radius: 10px;
             padding: 20px;
         }
@@ -145,10 +147,8 @@ body {
 </head>
 <body>
     <div class="css-animation-2">
-        <h1>Liquid effect with CSS animations and SVG filters</h1>
-        <p>Everything in the DOM is a square and developers go to great lengths to give their CSS animations round or assymetric features. SVG filters introduced in CSS3 give us so many new options, I will show you how to create so called 'sticky/liquid' effect in few easy steps.</p>
-    
-        <p class="centered">Final result (hover over buttons):</p>
+        
+ 
         <div class="css-animation-2">
             <div class="final">
                <div class="button">
@@ -206,124 +206,7 @@ body {
                     </div>
                 </div>
         </div>
-        <li><p>1) Choose any <a href="https://fontawesome.com/icons?d=gallery" target="blank">Font Awesome</a> icon. Link Font Awesome CDN in the document head. You can Google the latest version or find the link <a href="https://cdnjs.com/libraries/font-awesome">here</a>. It should look something linke this:</p> span.code<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"></xmp></li>
-
-        <li><p>2) Create div element with class of 'button'. Give it two children - 'i' element holding FontAwesome icon and div with class of 'blurred'. Then create two 'span' elements inside of 'blurred', we will need them for animation later. We need to structure the elements in this way, otherwise the color of our white icon will be mixing with our black background and the effect will not work</p>
-            <xmp>
-                <div class="button">
-                    <i class="fab fa-facebook-f"></i>
-                    <div class="blurred">
-                         <span></span><span></span>
-                     </div>
-                 </div>
-                </xmp>
-        </li>
-        
-        <li><p>3) Set basic CSS styles for 'button', 'i' and 'blurred' elements - give 'blurred' circle shape with <span class="code">border-radius: 100%</span>. Set 'button' to <span class="code">position:relative</span> and center 'i' element in the middle with <span class="code">position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);</span>. Also give 'i' element higher z-index:</p>
-            <xmp>
-                .button {
-                    position: relative;
-                    width: 50px;
-                    height: 50px;
-                }
-                i {
-                    position: absolute;
-                    top: 50%; left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 20px;
-                    z-index: 10;
-                    color: white;
-                }
-                .blurred {
-                    position: relative;
-                    top: 0; left: 0;
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 100%;
-                }
-            </xmp>
-        </li>
-        
-        <li><p>4) Create <span class="code">::before and ::after</span> pseudo elements on 'blurred' div and take both span elements we created earlier. Hide everything behind the button. <span class="code">::before</span> element will serve as a middle part that shrinks of hover, so we need to center it. </p>
-        <xmp>
-                .blurred::before {
-                    content: "";
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    transform: translate(-50%, -50%);
-                    top: 50%;
-                    left: 50%;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: .2s;
-                }
-                
-                .blurred::after {
-                    content: "";
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    top: 0;
-                    left: 0;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: .2s;
-                }
-                .blurred > span:nth-of-type(1) {
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    top: 0;
-                    left: 0;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: .2s;
-                }
-                .blurred > span:nth-of-type(2) {
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    top: 0;
-                    left: 0;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: .2s;
-                }
-        </xmp>
-        </li>
-
-        <li><p>5) <span class="code">::after</span> element and two spans will create expanding particles on hover, you can experiment with sizes and positions, I chose the following:</p>
-            <xmp>
-                .button:hover .blurred::before {
-                    width: 40px;
-                    height: 40px;
-                    top: 50%; left: 50%;
-                }
-                    
-                .button:hover .blurred::after {
-                    width: 15px;
-                    height: 15px;
-                    top: 30px;
-                    left: 45px;
-                }
-                .button:hover .blurred>span:nth-of-type(1) {
-                    width: 30px;
-                    height: 30px;
-                    top: -10px;
-                    left: -20px;
-                }
-                .button:hover > .blurred>span:nth-of-type(2) {
-                    width: 25px;
-                    height: 25px;
-                    top: 40px;
-                    left: -20px;
-                }
-            </xmp>
-        </li>
-        <h3>Add SVG filter into HTML markup</h3>
-        <li><p>6) Now we add SVG filter directly in our HTML markup, I usually leave it at the bottom of the page, just before the closing body tag</p>
-            <xmp>
+      
 <svg>
  <defs>
   <filter id='goo'>
@@ -338,110 +221,7 @@ body {
    </filter>
  </defs>
 </svg>
-            </xmp>
-        </li>
-        <li><p>7) Now we can use the filter on our 'blurred' div element to apply the final effect.</p>
-        <xmp>
-                .blurred {
-                    ...
-                    filter: url(#goo);
-                }
-        </xmp>
-        </li>
-        <li><p>8) Finally I will adjust values of 'transition' property on animated elements to make the effect more assymetric. Feel free to experiment with different timing, positions and cubic-beziers to create your own 'goo' animations.</p></li>
-        <p>Final CSS:</p>
-        <p><xmp>
-                .button {
-                    position: relative;
-                    width: 50px;
-                    height: 50px;
-                }
-                i {
-                    position: absolute;
-                    top: 50%; left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 20px;
-                    z-index: 10;
-                    color: white;
-                }
-                .blurred {
-                    position: relative;
-                    top: 0; left: 0;
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 100%;
-                    filter: url(#goo);
-                }
-                .blurred::before {
-                    content: "";
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    transform: translate(-50%, -50%);
-                    top: 50%;
-                    left: 50%;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: 1.5s cubic-bezier(0,2,.61,-0.05);
-                }
-                
-                .blurred::after {
-                    content: "";
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    top: 0;
-                    left: 0;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: 1.7s cubic-bezier(0,2,.61,-0.05);
-                }
-                .blurred > span:nth-of-type(1) {
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    top: 0;
-                    left: 0;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: 1.5s cubic-bezier(0,2,.61,-0.05);
-                }
-                .blurred > span:nth-of-type(2) {
-                    position: absolute;
-                    width: 50px;
-                    height: 50px;
-                    top: 0;
-                    left: 0;
-                    background-color: black;
-                    border-radius: 100%;
-                    transition: 1.6s cubic-bezier(0,2,.61,-0.05);
-                }
-                .button:hover .blurred::before {
-                    width: 40px;
-                    height: 40px;
-                    top: 50%; left: 50%;
-                }
-                
-                .button:hover .blurred::after {
-                    width: 15px;
-                    height: 15px;
-                    top: 30px;
-                    left: 45px;
-                }
-                .button:hover .blurred>span:nth-of-type(1) {
-                    width: 30px;
-                    height: 30px;
-                    top: -15px;
-                    left: -15px;
-                }
-                .button:hover > .blurred>span:nth-of-type(2) {
-                    width: 25px;
-                    height: 25px;
-                    top: 40px;
-                    left: -20px;
-                }
-        </xmp></p>
-
+  
     </div>
     <svg>
             <defs>
