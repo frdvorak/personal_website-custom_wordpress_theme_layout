@@ -85,7 +85,15 @@ a:hover {
     display: block;
     margin: 10px auto;
 }
-
+/** YOUTUBE EMBED WORDPRESS****/
+.wp-block-embed__wrapper {
+    text-align: center;
+}
+@media only screen and (max-width: 510px) {
+    figure.wp-block-embed-youtube {
+        display: none;
+    }
+}
 /**** GENERAL ELEMENT RULES MOBILE *******/
 @media only screen and (max-width: 600px) {
     body {
@@ -445,7 +453,6 @@ a:hover {
 .navigation li a:hover , .navigation li a:focus, .navigation li a:active {
     color: white !important;
     text-decoration: none;
-    background-color: black;
 }
 .navigation li a:focus, .navigation li a:focus-within, .navigation li a:active {
 
