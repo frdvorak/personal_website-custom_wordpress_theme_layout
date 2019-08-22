@@ -445,10 +445,11 @@ a:hover {
     position: relative;
     padding: 0 20px;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .navigation .current-menu-item a {
-    text-decoration: none;
+    text-decoration: underline;
 }
 .navigation li a:hover , .navigation li a:focus, .navigation li a:active {
     color: white !important;
@@ -783,7 +784,7 @@ a:hover {
 .single_content {
     display: grid;
 	width: 100%;
-    grid-template-columns: auto 350px;
+    grid-template-columns: auto 390px;
     padding: 0 60px;
 	position: relative;
     margin: 0 auto;
@@ -819,6 +820,11 @@ font-size: 5rem;
 }
 .single_sidebar .widget{
     padding-bottom: 30px;
+}
+/* recent posts */
+.widget_recent_entries .post-date {
+    font-size: 12px;
+    display: block;
 }
 /* SINGLE BLOG PAGE TABLET*/
 @media only screen and (max-width: 900px) {
