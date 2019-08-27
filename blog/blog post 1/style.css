@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 70px auto;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    display: grid;
+}
+.button {
+    display: block;
+    position: relative;
+    left: 0; top: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    overflow:hidden;
+}
+.button::before {
+    content: '';
+    left: -50px; top: 50px;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #3C5A99;
+    border-radius: 100%;
+    transition: .15s ease-in;
+}
+i  {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #3C5A99;
+    z-index: 10;
+}
+.button::after {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 0;
+    width: 45px;
+    height: 45px;
+    background-color: white;
+    border-radius: 100%;
+    transition: .25s cubic-bezier(.14,1.88,.3,.76);
+}
+.button:hover::before {
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+}
+.button:hover::after {
+    left: 10px;
+    top: -2px;
+    width: 45px;
+    height: 45px;
+    transition-delay: .2s;
+}
+.button:nth-of-type(2)::before {
+    background-color: #c32aa3;
+}
+.button:nth-of-type(3)::before {
+    background-color: #ff0000;
+}
+.button:nth-of-type(4)::before {
+    background-color: #007bb5;
+}
+.button:nth-of-type(5)::before {
+    background-color: #db4437;
+}
+.button:nth-of-type(6)::before {
+    background-color: #1da1f2;
+}
+.button:nth-of-type(7)::before {
+    background-color: #bd081c;
+}
+.button:nth-of-type(8)::before {
+    background-color: #25d366;
+}
+.button:nth-of-type(9)::before {
+    background-color: #6441a4;
+}
+.fa-instagram {
+    color: #c32aa3;
+}
+.fa-youtube {
+    color: #ff0000;
+}
+.fa-linkedin-in {
+    color: #007bb5;
+}
+.fa-google-plus-g {
+    color:#db4437;
+}
+.fa-twitter {
+    color:#1da1f2;
+}
+.fa-pinterest-p {
+    color: #bd081c;
+}
+.fa-whatsapp {
+    color: #25d366;
+}
+.twitch {
+    color: #6441a4;
+}
