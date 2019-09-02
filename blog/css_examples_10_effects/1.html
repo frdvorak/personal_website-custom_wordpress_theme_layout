@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,700|Londrina+Shadow|Shadows+Into+Light|Special+Elite&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <title>Liquid effect with CSS animations and SVG filters</title>
+    <style>
+body {
+    background-color: white;
+}
+        xmp {
+
+        }
+        .block {
+
+        }
+        .code {
+
+        }
+        img {
+
+        }
+        .about {
+
+        }
+        .center {
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        .centered {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+        }
+        .final {
+            position: relative;
+            margin: 600px auto;
+
+            transform: scale(3);
+            width: 220px;
+            height: 220px;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto auto;
+            grid-gap: 10px;
+
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .button {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+        i {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            z-index: 10;
+            color: white;
+        }
+        .blurred {
+            position: relative;
+            top: 0; left: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            filter: url(#goo);
+        }
+        .blurred::before {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            background-color: black;
+            border-radius: 100%;
+            transition: 1.5s cubic-bezier(0,2,.61,-0.05);
+        }
+        
+        .blurred::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 0;
+            left: 0;
+            background-color: black;
+            border-radius: 100%;
+            transition: 1.7s cubic-bezier(0,2,.61,-0.05);
+        }
+        .blurred > span:nth-of-type(1) {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 0;
+            left: 0;
+            background-color: black;
+            border-radius: 100%;
+            transition: 1.5s cubic-bezier(0,2,.61,-0.05);
+        }
+        .blurred > span:nth-of-type(2) {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 0;
+            left: 0;
+            background-color: black;
+            border-radius: 100%;
+            transition: 1.6s cubic-bezier(0,2,.61,-0.05);
+        }
+        .button:hover .blurred::before {
+            width: 40px;
+            height: 40px;
+            top: 50%; left: 50%;
+        }
+        
+        .button:hover .blurred::after {
+            width: 15px;
+            height: 15px;
+            top: 30px;
+            left: 45px;
+        }
+        .button:hover .blurred>span:nth-of-type(1) {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            left: -15px;
+        }
+        .button:hover > .blurred>span:nth-of-type(2) {
+            width: 25px;
+            height: 25px;
+            top: 40px;
+            left: -20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="css-animation-2">
+        
+ 
+        <div class="css-animation-2">
+            <div class="final">
+               <div class="button">
+                   <i class="fab fa-facebook-f"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-instagram"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-youtube"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-linkedin-in"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-google-plus-g"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-twitter"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-pinterest-p"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-whatsapp"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+                <div class="button">
+                   <i class="fab fa-twitch"></i>
+                   <div class="blurred">
+                        <span></span><span></span>
+                    </div>
+                </div>
+        </div>
+      
+<svg>
+ <defs>
+  <filter id='goo'>
+   <feGaussianBlur in='SourceGraphic' 
+   stdDeviation='10' result='name'/>
+    <feColorMatrix in='name' mode='matrix'
+        values='	1 0 0 0 0
+                    0 1 0 0 0 
+                    0 0 1 0 0
+                    0 0 0 30 -15 ' result='aab'/>
+    <feBlend in='SourceGraphic' in2='aab'/>
+   </filter>
+ </defs>
+</svg>
+  
+    </div>
+    <svg>
+            <defs>
+                <filter id='goo'>
+                    <feGaussianBlur in='SourceGraphic' stdDeviation='10' result='name'/>
+                    <feColorMatrix in='name' mode='matrix' values='	1 0 0 0 0
+                                                                    0 1 0 0 0 
+                                                                    0 0 1 0 0
+                                                                    0 0 0 30 -15 ' result='aab'/>
+                    <feBlend in='SourceGraphic' in2='aab'/>
+                </filter>
+            </defs>
+        </svg>
+</body>
+</html>

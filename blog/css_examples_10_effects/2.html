@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>3D transforms</title>
+    <style>
+
+        .final {
+            position: relative;
+            margin: 50px auto;
+            width: 240px;
+            height: 240px;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto auto;
+            grid-gap: 10px;
+            border-radius: 10px;
+            padding: 30px;
+            transform: scale(2);
+            margin-top: 100px;
+            padding-top: 150px;
+            padding-left: 150px;
+        }
+        .button {
+            display: block;
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background-color: #f5b0d6;
+            transform: translate(0, 0) rotate(0) skew(0);
+            transition: .2s;
+        }
+        .button:hover {
+            transform: translate(-15px, -5px) rotateY(-15deg) skewY(-10deg);
+        }
+        .button span{
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            transition: .2s;
+            transform: translate(0, 0);
+        }
+        i {
+            font-size: 25px;
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            z-index: 10;
+            transition: .2s;
+        }
+        .button:hover i {
+            color: white;
+        }
+        .button span:nth-of-type(4){
+            transform: translate(-4px, -4px);
+            transition: .2s;
+            z-index: 0;
+            opacity: .5;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+        }
+        .button:hover span:nth-of-type(1){
+            transform: translate(8px, 4px);
+            background-color: #e08dbb;
+            
+        }
+        .button:hover span:nth-of-type(2){
+            transform: translate(16px, 8px);
+            background-color: #bd6093;
+        }
+        .button:hover span:nth-of-type(3){
+            transform: translate(24px, 12px);
+            background-color: #94386a;
+        }
+        .button:hover span:nth-of-type(4){
+            transform: translate(30px, 16px);
+            transition-delay: .2s;
+
+        }
+        .button span:nth-of-type(4)::before{
+            content: '';
+            position: absolute;
+            width: 0; height: 100%;
+            top: 0; left: 0;
+            border-bottom: 1px solid black;
+            transition: .2s;
+         }
+        .button:hover span:nth-of-type(4)::before{
+            width: 100%;
+            transition-delay: .4s;
+        }
+        .button span:nth-of-type(4)::after{
+            content: '';
+            position: absolute;
+            width: 100%; height: 0;
+            top: 100%; right: 0;
+            border-right: 1px solid black;
+            transition: .2s;
+            transform-origin: bottom;
+         }
+        .button:hover span:nth-of-type(4)::after{
+            height: 100%;
+            transition-delay: .6s;
+            top: 0;
+        }
+
+        
+        .button span:nth-of-type(4){
+
+        }
+        .button span:nth-of-type(4)::before{
+
+         }
+        .button:hover span:nth-of-type(4)::before{
+
+        }
+        .button span:nth-of-type(4)::after{
+
+         }
+        .button:hover span:nth-of-type(4)::after{
+
+        }
+        .button:hover span:nth-of-type(1){
+
+        }
+        .button:hover span:nth-of-type(2){
+
+        }
+        .button:hover span:nth-of-type(3){
+ 
+        }
+        .button:hover span:nth-of-type(4){
+
+        }
+    </style>
+</head>
+<body>
+
+
+            <div class="final">
+                <div class="button">
+                   <span></span>
+                   <span></span>
+                   <span><i class="fab fa-html5"></i></span>
+                   <span></span>
+                </div>
+                <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fab fa-css3-alt"></i></span>
+                    <span></span>
+                 </div>
+                 <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fab fa-js"></i></span>
+                    <span></span>
+                 </div>
+                 <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fab fa-react"></i></span>
+                    <span></span>
+                 </div>
+                 <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fab fa-bootstrap"></i></span>
+                    <span></span>
+                 </div>
+                 <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fab fa-node"></i></span>
+                    <span></span>
+                 </div>
+                 <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fas fa-database"></i></span>
+                    <span></span>
+                 </div>
+                 <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fab fa-windows"></i></span>
+                    <span></span>
+                 </div>
+                 <div class="button">
+                    <span></span>
+                    <span></span>
+                    <span><i class="fab fa-wordpress"></i></span>
+                    <span></span>
+                 </div>
+        </div>
+     
+
+  
+</body>
+</html>

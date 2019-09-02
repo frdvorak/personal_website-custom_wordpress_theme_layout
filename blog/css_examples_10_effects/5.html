@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <style>
+        body {
+            height: 200vh;
+        }
+        .final {
+            position: relative;
+            margin: 50px auto;
+            margin-top: 15%;
+            width: 200px;
+            height: 200px;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto auto;
+            grid-gap: 10px;
+            border-radius: 10px;
+            padding: 20px;
+            transform: scale(2);
+        }
+        .button {
+            display: block;
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+        .button::before {
+            content: "";
+            left: 0px;
+            top: 50px;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #3C5A99;
+            border-radius: 100%;
+            transition: .3s ease-in;
+        }
+        .button:nth-of-type(2)::before {
+            background-color: #c32aa3;
+        }
+        .button:nth-of-type(3)::before {
+            background-color: #ff0000;
+        }
+        .button:nth-of-type(4)::before {
+            background-color: #007bb5;
+        }
+        .button:nth-of-type(5)::before {
+            background-color: #db4437;
+        }
+        .button:nth-of-type(6)::before {
+            background-color: #1da1f2;
+        }
+        .button:nth-of-type(7)::before {
+            background-color: #bd081c;
+        }
+        .button:nth-of-type(8)::before {
+            background-color: #25d366;
+        }
+        .button:nth-of-type(9)::before {
+            background-color: #6441a4;
+        }
+        .button::after {
+            content: "";
+            position: absolute;
+            left: 60px;
+            top: 0px;
+            width: 45px;
+            height: 45px;
+            background-color: white;
+            border-radius: 100%;
+            transition: .5s cubic-bezier(.14,1.88,.3,.76);
+        }
+        /*
+        .button:nth-of-type(2)::after {
+            background-color: #fc35d3;
+        }
+        .button:nth-of-type(3)::after {
+            background-color: rgba(255,255,255,.6);
+        }
+        .button:nth-of-type(4)::after {
+            background-color: #00a8f7;
+        }
+        .button:nth-of-type(5)::after {
+            background-color: #ff5647;
+        }
+        .button:nth-of-type(6)::after {
+            background-color: #85d0ff;
+        }
+        .button:nth-of-type(7)::after {
+            background-color: #ff2e45;
+        }
+        .button:nth-of-type(8)::after {
+            background-color: #199c4a;
+        }
+        .button:nth-of-type(9)::after {
+            background-color: #c09eff;
+        }*/
+        .button:hover::before {
+            left: 0px;
+            top: 0px;
+            width: 50px;
+            height: 50px;
+        }
+        .button:hover::after {
+            left: 10px;
+            top: -2px;
+            width: 45px;
+            height: 45px;
+            transition-delay: .2s;
+        }
+        i {
+            font-size: 30px;
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #3C5A99;
+            z-index: 10;
+            transition: .2s;
+        }
+        .fa-instagram {
+            color: #c32aa3;
+        }
+        .fa-youtube {
+            color: #ff0000;
+        }
+        .fa-linkedin-in {
+            color: #007bb5;
+        }
+        .fa-google-plus-g {
+            color:#db4437;
+        }
+        .fa-twitter {
+            color:#1da1f2;
+        }
+        .fa-pinterest-p {
+            color: #bd081c;
+        }
+        .fa-whatsapp {
+            color: #25d366;
+        }
+        .twitch {
+            color: #6441a4;
+        }
+    </style>
+</head>
+<body>
+    <div class="css-animation-1">
+
+      
+        <div class="css-animation-1">
+            <div class="final">
+               <div class="button"><i class="fab fa-facebook-f"></i></div>
+               <div class="button"><i class="fab fa-instagram"></i></div>
+               <div class="button"><i class="fab fa-youtube"></i></div>
+               <div class="button"><i class="fab fa-linkedin-in"></i></div>
+               <div class="button"><i class="fab fa-google-plus-g"></i></div>
+               <div class="button"><i class="fab fa-twitter"></i></div>
+               <div class="button"><i class="fab fa-pinterest-p"></i></div>
+               <div class="button"><i class="fab fa-whatsapp"></i></div>
+               <div class="button"><i class="fab fa-twitch"></i></div>
+            </div>
+        </div>
+    
+</body>
+</html>

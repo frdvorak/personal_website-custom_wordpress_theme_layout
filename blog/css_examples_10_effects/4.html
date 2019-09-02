@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.button {
+    margin: 30px auto;
+    width: 160px;
+    height: 60px;
+    border: 1px solid black;
+    position: relative;
+}
+.button p {
+    line-height: 60px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+    position: relative;
+    transition: .8s;
+    z-index: 10;
+}
+.button span {
+    color: transparent;
+    position: relative;
+}
+.button span::before {
+    content: 'H';
+    position: absolute;
+    width: auto;
+    height: 60px;
+    color: black;
+    transition: .2s ease-out;
+}
+.button:nth-of-type(2) span::before {
+    content: 'P';
+}
+.button:nth-of-type(3) span::before {
+    content: 'A';
+}
+.button:nth-of-type(4) span::before {
+    content: 'C';
+}
+.button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    transition: .8s;
+    z-index: 1;
+}
+.button:hover::after {
+    background-color: rgba(0,0,0,1);
+    transform: rotate(10deg);
+}
+.button:hover p {
+    color: white;
+}
+.button:hover span::before {
+    color: white;
+    transform: translate(-65%, -10%) rotate(360deg);
+    font-size: 80px;
+}
+    </style>
+    <div class="button">
+        <p><span>H</span>ome</p>
+    </div>
+    <div class="button">
+        <p><span>P</span>roduct</p>
+    </div>
+    <div class="button">
+        <p><span>A</span>bout</p>
+    </div>
+    <div class="button">
+        <p><span>C</span>ontact</p>
+    </div>
+</body>
+</html>
