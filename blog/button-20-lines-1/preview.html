@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>3D transforms</title>
+    <style>
+        * {
+            padding: 0; margin: 0; box-sizing: border-box;
+        }
+        body {
+            height: 200vh;
+        }
+        .container {
+            width: 200px;
+            height: auto;
+            position: relative;
+            margin: 60px auto;
+        }
+        .button {
+            width: 200px;
+            height: 60px;
+            position: relative;
+            overflow: hidden;
+            transition: 1.6s;
+            margin: 10px;
+            border: 1px solid black;
+        }
+        ul {
+            list-style-type: none;
+            display: block;
+            height: 60px;
+        }
+        .right {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        li {
+            background-color: black;
+            width: 100%;
+            height: 6px;
+            transition: 1.2s;
+            border-radius: 50%;
+        }
+        .left {
+            width: 80%;
+            position: absolute;
+            left: 0; top: 0;
+        }
+        .right {
+            width: 80%;
+            position: absolute;
+            left: 20%; top: 0;
+        }
+        .left li {
+            position: relative;
+            left: -205px;
+        }
+        .right li {
+            position: relative;
+            left: 205px;
+        }
+        .button:hover li {
+            left: 0;
+            border-radius: 0;
+            transition: 1.2s cubic-bezier(0,2,.2,-1);
+        }
+        .button li:nth-child(2) {
+            transition-delay: .05s;
+        }
+        .button li:nth-child(3) {
+            transition-delay: .1s;
+        }
+        .button li:nth-child(4) {
+            transition-delay: .15s;
+        }
+        .button li:nth-child(5) {
+            transition-delay: .2s;
+        }
+        .button li:nth-child(6) {
+            transition-delay: .25s;
+        }
+        .button li:nth-child(7) {
+            transition-delay: .3s;
+        }
+        .button li:nth-child(8) {
+            transition-delay: .35s;
+        }
+        .button li:nth-child(9) {
+            transition-delay: .4s;
+        }
+        .button li:nth-child(10) {
+            transition-delay: .45s;
+        }
+        .button:hover {
+            color: white;
+            transition: 1.6s cubic-bezier(0,2,.5,-0.3);
+        }
+        .button p {
+            position: relative;
+            z-index: 10;
+            line-height: 60px;
+            text-align: center;
+            font-size: 25px;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <div class="button">
+           <p>HOME</p>
+           <ul class="left">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+           </ul>
+           <ul class="right">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+           </ul>
+       </div>
+       <div class="button">
+            <p>ABOUT</p>
+            <ul class="left">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class="right">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="button">
+           <p>LINKS</p>
+           <ul class="left">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+           </ul>
+           <ul class="right">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+           </ul>
+       </div>
+       <div class="button">
+           <p>CONTACT</p>
+           <ul class="left">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+           </ul>
+           <ul class="right">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+           </ul>
+       </div>
+       
+    </div>
+
+</body>
+</html>
