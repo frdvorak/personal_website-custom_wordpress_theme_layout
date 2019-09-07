@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>Dripping buttons</title>
+    <style>
+        * {
+            padding: 0; margin: 0; box-sizing: border-box;
+        }
+        body {
+            height: 200vh;
+        }
+        .container {
+            width: 530px;
+            height: 100px;
+            position: relative;
+            margin: 150px auto;
+            filter: url(#goo);
+        }
+        .button {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin-bottom: 40px;
+            transition: .5s;
+            background-color: black;
+            float: left;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .button::before {
+            content: '';
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            top: 15px;
+            right: 20px;
+            position: absolute;
+            border-radius: 50%;
+            transform: rotateX(-15deg) rotateY(-15deg);
+        }
+        .button::after {
+            content: '';
+            background-color: black;
+            width: 100%;
+            height: 10px;
+            left: 0;
+            bottom: -30px;
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(5px);
+        }
+        .button p:nth-child(1) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 40px;
+            z-index: 100;
+            transform: translate(-50%,-50%) rotateX(0);
+            color: white;
+            transition: .3s ease-in;
+        }
+        .button:hover p:nth-child(1){
+            transform: translate(-50%,60%) rotateX(90deg);
+        }
+        .button p:nth-child(2) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 40px;
+            z-index: 100;
+            transform: translate(-50%,-170%) rotateX(-90deg);
+            color: white;
+            transition: .3s ease-in;
+        }
+        .button:hover p:nth-child(2){
+            transform: translate(-50%,-50%) rotateX(0);
+        }
+        .button:hover ~ .button {
+            transform: translateX(2px);
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+      <div class="button">
+        <p>H</p>
+        <p>I</p>
+      </div>
+      <div class="button">
+        <p>O</p>
+        <p>&hearts;</p>
+      </div>
+      <div class="button">
+        <p>V</p>
+        <p>C</p>
+      </div>
+      <div class="button">
+        <p>E</p>
+        <p>S</p>
+    </div>
+    <div class="button">
+        <p>R</p>
+        <p>S</p>
+    </div>
+    </div>
+    <svg>
+        <defs>
+         <filter id='goo'>
+          <feGaussianBlur in='SourceGraphic' stdDeviation='10'/>
+           <feColorMatrix in='name' mode='matrix'
+               values='1 0 0 0 0
+                       0 1 0 0 0 
+                       0 0 1 0 0
+                       0 0 0 30 -15 '/>
+           <feBlend in='SourceGraphic'/>
+          </filter>
+        </defs>
+       </svg>
+
+</body>
+</html>
