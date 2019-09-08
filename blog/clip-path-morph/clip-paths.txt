@@ -1,0 +1,91 @@
+-webkit-clip-path: polygon(300px 136px,284px 152px,285px 172px,316px 183px,345px 175px,340px 204px,352px 245px,367px 282px,376px 296px,371px 352px,370px 383px,355px 414px,380px 413px,385px 383px,388px 346px,395px 303px,425px 308px,510px 300px,549px 332px,558px 346px,547px 381px,538px 397px,524px 412px,549px 415px,575px 374px,584px 336px,561px 302px,572px 277px,578px 249px,570px 216px,541px 200px,473px 210px,403px 191px,392px 138px,378px 112px,380px 84px,404px 73px,450px 22px,457px 3px,394px 58px,363px 74px,354px 107px,313px 131px);
+<svg width="0" height="0">
+  <clipPath id="clipPolygon">
+    <polygon points="300 136,284 152,285 172,316 183,345 175,340 204,352 245,367 282,376 296,371 352,370 383,355 414,380 413,385 383,388 346,395 303,425 308,510 300,549 332,558 346,547 381,538 397,524 412,549 415,575 374,584 336,561 302,572 277,578 249,570 216,541 200,473 210,403 191,392 138,378 112,380 84,404 73,450 22,457 3,394 58,363 74,354 107,313 131">
+    </polygon>
+  </clipPath>
+</svg>
+
+
+-webkit-clip-path: polygon(40px 325px,35px 348px,66px 392px,152px 360px,209px 300px,302px 308px,313px 374px,298px 417px,339px 416px,364px 371px,358px 325px,413px 311px,532px 304px,658px 294px,734px 266px,796px 294px,824px 348px,808px 395px,796px 417px,820px 421px,834px 406px,838px 419px,855px 419px,871px 419px,873px 392px,885px 367px,883px 312px,883px 269px,892px 226px,884px 153px,858px 85px,767px 39px,619px 30px,474px -2px,306px 0px,194px 109px,118px 94px,138px 167px,109px 211px,62px 200px,84px 233px,57px 267px,7px 256px);
+<svg width="0" height="0">
+  <clipPath id="clipPolygon">
+    <polygon points="40 325,35 348,66 392,152 360,209 300,302 308,313 374,298 417,339 416,364 371,358 325,413 311,532 304,658 294,734 266,796 294,824 348,808 395,796 417,820 421,834 406,838 419,855 419,871 419,873 392,885 367,883 312,883 269,892 226,884 153,858 85,767 39,619 30,474 -2,306 0,194 109,118 94,138 167,109 211,62 200,84 233,57 267,7 256">
+    </polygon>
+  </clipPath>
+</svg>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>3D transforms</title>
+    <style>
+        * {
+            padding: 0; margin: 0; box-sizing: border-box;
+        }
+       .container {
+        transition: 1s;
+       }
+.block {
+    width: 1000px;
+    height: 500px;
+    -webkit-clip-path: polygon(281px 130px,271px 142px,264px 154px,254px 166px,263px 189px,288px 200px,327px 191px,350px 182px,379px 237px,362px 286px,345px 341px,342px 370px,371px 374px,381px 340px,397px 295px,436px 267px,483px 269px,519px 268px,554px 272px,570px 302px,573px 329px,593px 371px,621px 372px,612px 264px,633px 337px,671px 342px,665px 327px,654px 289px,635px 229px,642px 198px,626px 149px,557px 132px,488px 145px,471px 108px,461px 125px,444px 84px,435px 104px,426px 75px,416px 94px,408px 68px,355px 38px,357px 62px,331px 49px,336px 86px,309px 100px);
+
+    transition: 1s;
+    background-color: black;
+}
+.rhino:hover ~ .block {
+    transition: 1s;
+    -webkit-clip-path: polygon(40px 325px,35px 348px,66px 392px,152px 360px,209px 300px,302px 308px,313px 374px,298px 417px,339px 416px,364px 371px,358px 325px,413px 311px,532px 304px,658px 294px,734px 266px,796px 294px,824px 348px,808px 395px,796px 417px,820px 421px,834px 406px,838px 419px,855px 419px,871px 419px,873px 392px,885px 367px,883px 312px,883px 269px,892px 226px,884px 153px,858px 85px,767px 39px,619px 30px,474px -2px,306px 0px,194px 109px,118px 94px,138px 167px,109px 211px,62px 200px,84px 233px,57px 267px,7px 256px);
+}
+.gazelle:hover ~ .block{
+    transition: 1s;
+    -webkit-clip-path: polygon(321px 145px,286px 187px,300px 201px,323px 203px,349px 184px,339px 216px,345px 254px,358px 286px,369px 304px,364px 355px,364px 391px,346px 418px,372px 418px,385px 389px,389px 351px,395px 303px,438px 308px,481px 293px,548px 337px,553px 351px,547px 381px,538px 397px,524px 412px,549px 415px,575px 374px,584px 336px,561px 302px,572px 277px,583px 240px,570px 216px,541px 200px,473px 210px,403px 191px,398px 145px,378px 112px,373px 77px,416px 65px,446px 36px,457px 3px,402px 51px,355px 57px,354px 107px,324px 129px);
+
+}
+.elephant:hover ~ .block {
+    transition: 1s;
+    -webkit-clip-path: polygon(340px 172px,332px 189px,285px 217px,296px 224px,334px 220px,358px 230px,392px 233px,415px 263px,414px 297px,387px 340px,387px 388px,381px 415px,413px 421px,423px 387px,429px 345px,473px 317px,506px 311px,562px 314px,597px 318px,613px 348px,616px 376px,617px 395px,614px 416px,644px 415px,650px 370px,645px 321px,621px 279px,672px 326px,667px 244px,638px 192px,600px 178px,532px 193px,515px 139px,483px 117px,454px 105px,444px 93px,441px 80px,436px 57px,426px 104px,394px 79px,398px 115px,369px 150px,356px 159px);
+
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="button rhino">Rhino</div>
+        
+        <div class="button elephant">Elephant</div>
+        <div class="button gazelle">Gazelle</div>
+        <div class="button unicorn">Horse</div>
+        <div class="block"></div>
+    </div>
+
+</body>
+</html>
+
+Elephant
+/*Chrome,Safari*/
+-webkit-clip-path: polygon(124px 223px,135px 359px,168px 230px,204px 329px,193px 385px,184px 421px,244px 419px,239px 365px,297px 299px,451px 294px,479px 395px,471px 420px,531px 421px,520px 382px,534px 296px,574px 256px,600px 236px,625px 220px,657px 221px,677px 242px,706px 261px,746px 263px,699px 236px,668px 210px,721px 209px,767px 185px,775px 120px,758px 76px,754px 44px,771px 19px,755px -1px,731px 30px,718px 77px,727px 119px,708px 140px,633px 63px,556px 45px,507px 66px,452px 73px,525px 200px,441px 157px,436px 70px,308px 53px,186px 110px);
+
+/*Firefox*/
+clip-path: url("#clipPolygon");
+
+<svg width="0" height="0">
+  <clipPath id="clipPolygon">
+    <polygon points="40 325,35 348,66 392,152 360,209 300,302 308,313 374,298 417,339 416,364 371,358 325,413 311,532 304,658 294,734 266,796 294,824 348,808 395,796 417,820 421,834 406,838 419,855 419,871 419,873 392,885 367,883 312,883 269,892 226,884 153,858 85,767 39,619 30,474 -2,306 0,194 109,118 94,138 167,109 211,62 200,84 233,57 267,7 256">
+    </polygon>
+  </clipPath>
+</svg>
+<svg width="0" height="0">
+  <clipPath id="clipPolygon">
+    <polygon points="300 136,284 152,285 172,316 183,345 175,340 204,352 245,367 282,376 296,371 352,370 383,355 414,380 413,385 383,388 346,395 303,425 308,510 300,549 332,558 346,547 381,538 397,524 412,549 415,575 374,584 336,561 302,572 277,578 249,570 216,541 200,473 210,403 191,392 138,378 112,380 84,404 73,450 22,457 3,394 58,363 74,354 107,313 131">
+    </polygon>
+  </clipPath>
+</svg>

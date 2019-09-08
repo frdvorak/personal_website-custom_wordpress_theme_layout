@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>3D transforms</title>
+    <style>
+        * {
+            padding: 0; margin: 0; box-sizing: border-box;
+        }
+        body {
+            height: 200vh;
+        }
+        .container {
+            width: 800px;
+            position: relative;
+            margin: 90px auto;
+        }
+        .button {
+            width: 220px;
+            height: 100px;
+            clip-path: polygon(0 0, 60% 0, 100% 0, 100% 50%, 100% 100%, 60% 100%, 0 100%);
+            background-color: black;
+            transition: .5s;
+            font-size: 35px;
+            text-align: left;
+            padding-left: 20px;
+            color: white;
+            line-height: 100px;
+            border-radius: 10%;
+            margin: 10px;
+            font-family: Impact, sans-serif;
+        }
+        .button:hover {
+            clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+        }
+.block {
+   /*Chrome,Safari*/
+   position: absolute;
+   top: 0;
+   left: 180px;
+   width: 700px;
+   height: 500px;
+   border: 1px solid black;
+   clip-path: polygon(277px 16px,260px 42px,238px 43px,226px 21px,193px 6px,136px 0px,152px 50px,184px 79px,116px 154px,160px 138px,138px 178px,177px 172px,159px 234px,166px 271px,170px 308px,152px 391px,137px 420px,197px 417px,195px 388px,213px 337px,217px 380px,218px 418px,264px 419px,251px 393px,286px 391px,272px 419px,288px 419px,368px 417px,419px 369px,451px 283px,449px 190px,481px 176px,549px 184px,581px 213px,631px 208px,618px 115px,565px 60px,523px 42px,415px 27px,350px 80px,359px 224px,382px 302px,355px 381px,369px 315px,356px 242px,313px 167px,341px 182px,327px 136px,365px 145px,306px 78px,337px 53px,351px 26px,358px 5px,308px 7px);
+    transition: 1s;
+    background-color: black;
+}
+
+.button:nth-child(1):hover ~ .block {
+    -webkit-clip-path: polygon(277px 16px,260px 42px,238px 43px,226px 21px,193px 6px,136px 0px,152px 50px,184px 79px,116px 154px,160px 138px,138px 178px,177px 172px,159px 234px,166px 271px,170px 308px,152px 391px,137px 420px,197px 417px,195px 388px,213px 337px,217px 380px,218px 418px,264px 419px,251px 393px,286px 391px,272px 419px,288px 419px,368px 417px,419px 369px,451px 283px,449px 190px,481px 176px,524px 198px,546px 254px,596px 221px,583px 121px,546px 59px,473px 25px,387px 17px,328px 77px,359px 224px,382px 302px,355px 381px,369px 315px,356px 242px,313px 167px,341px 182px,327px 136px,365px 145px,306px 78px,337px 53px,351px 26px,358px 5px,308px 7px);
+
+}
+.button:nth-child(2):hover ~ .block {
+-webkit-clip-path: polygon(273px 16px,260px 42px,238px 43px,234px 22px,220px 2px,198px 7px,190px 37px,184px 79px,159px 102px,93px 145px,125px 192px,192px 181px,174px 237px,179px 274px,180px 314px,156px 369px,148px 407px,185px 407px,188px 361px,213px 337px,217px 380px,218px 418px,264px 419px,251px 393px,286px 391px,272px 419px,288px 419px,368px 417px,419px 369px,451px 283px,465px 236px,490px 201px,517px 260px,582px 283px,630px 234px,581px 197px,584px 85px,521px 14px,425px 8px,373px 87px,359px 224px,382px 302px,355px 381px,369px 315px,356px 242px,303px 164px,335px 159px,299px 131px,333px 132px,306px 78px,323px 39px,330px 18px,327px 4px,303px 5px);
+}
+.button:nth-child(3):hover ~ .block {
+-webkit-clip-path: polygon(277px 16px,260px 42px,238px 43px,226px 21px,193px 6px,136px 0px,152px 50px,184px 79px,116px 154px,160px 138px,138px 178px,177px 172px,159px 234px,166px 271px,170px 308px,145px 345px,143px 392px,183px 394px,173px 362px,213px 337px,217px 380px,218px 418px,264px 419px,251px 393px,286px 391px,272px 419px,288px 419px,368px 417px,419px 369px,451px 283px,449px 190px,481px 176px,524px 198px,546px 254px,596px 221px,583px 121px,546px 59px,473px 25px,387px 17px,328px 77px,359px 224px,382px 302px,355px 381px,369px 315px,356px 242px,313px 167px,341px 182px,327px 136px,365px 145px,306px 78px,337px 53px,351px 26px,358px 5px,308px 7px);
+
+}
+
+.button:nth-child(4):hover ~ .block {
+-webkit-clip-path: polygon(273px 16px,260px 42px,238px 43px,234px 22px,220px 2px,198px 7px,190px 37px,184px 79px,159px 102px,93px 145px,125px 192px,192px 181px,174px 237px,179px 274px,187px 324px,171px 367px,174px 405px,205px 408px,201px 372px,213px 337px,217px 380px,218px 418px,264px 419px,251px 393px,286px 391px,272px 419px,288px 419px,368px 417px,419px 369px,451px 283px,465px 236px,490px 201px,517px 260px,554px 332px,597px 278px,591px 205px,608px 86px,545px 16px,448px 2px,395px 67px,369px 164px,394px 299px,355px 381px,369px 315px,356px 242px,303px 164px,335px 159px,299px 131px,333px 132px,306px 78px,323px 39px,330px 18px,327px 4px,303px 5px);
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="button">HOME</div>
+        <div class="button">PRODUCTS</div>
+        <div class="button">ABOUT</div>
+        <div class="button">SHOP</div>
+        <div class="block"></div>
+    </div>
+
+</body>
+</html>
