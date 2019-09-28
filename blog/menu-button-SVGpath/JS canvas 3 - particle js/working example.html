@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>Particle JS like effect</title>
+    <style>
+        * {
+            padding: 0; margin: 0; box-sizing: border-box;
+        }
+        #canvas1 {
+            position: absolute;
+            top: 0; left: 0;
+	        width: 100%;
+	        height: 100%;
+        	background: linear-gradient(to bottom right, black 60%, red);
+}
+
+    </style>
+</head>
+<body>
+    <canvas id='canvas1'></canvas>
+
+</body>
+<script>
+const canvas = document.getElementById("canvas1");
+canvas.width  = window.innerWidth;
+canvas.height = window.innerHeight;
+const ctx = canvas.getContext("2d");
+
+function anim() {
+    this.arrayPoint = [];
+}
+anim.prototype.generatePoint = function() {
+    let counter = 0;
+    for (let x = 1; x < 10; x++) {
+        for (let y = 1; y < 10; y++) {
+            this.arrayPoint[counter] = {
+                x: (canvas.width / 10) * x,
+                y: (canvas.height / 10) * y
+            }
+            counter++;
+        }
+    }
+}
+anim.prototype.draw = function() {
+    ctx.save();
+    ctx.fillStyle = "white";
+    for (let index = 0; index < this.arrayPoint.length; index++) {
+        ctx.beginPath();
+        ctx.arc(this.arrayPoint[index].x, this.arrayPoint[index].y, canvas.width / 500, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    ctx.restore();
+}
+
+
+anim.prototype.move = function() {
+    let directionX =  (Math.random() > 0.5) ? 0.3 : -0.3;;
+    let directionY = 0.5;
+    for (let index = 0; index < this.arrayPoint.length; index++) {
+        this.arrayPoint[index].x += (Math.random() > 0.5) ? 0.3 : -0.3;
+        this.arrayPoint[index].y += (Math.random() > 0.5) ? 0.3 : -0.3;
+    }
+}
+anim.prototype.check = function() {
+    ctx.save();
+    ctx.strokeStyle="white"; 
+    
+    for (let index = 0; index < this.arrayPoint.length; index++) {
+        
+        for (let i = index; i < this.arrayPoint.length; i++) {
+            if 
+            (((this.arrayPoint[index].x - this.arrayPoint[i].x)*(this.arrayPoint[index].x - this.arrayPoint[i].x))
+            +
+            ((this.arrayPoint[index].y - this.arrayPoint[i].y)*(this.arrayPoint[index].y - this.arrayPoint[i].y))
+            < (canvas.width/10) * (canvas.width/10)){
+                    ctx.beginPath();
+                    ctx.moveTo(this.arrayPoint[index].x, this.arrayPoint[index].y);
+                    ctx.lineTo(this.arrayPoint[i].x, this.arrayPoint[i].y);
+                    ctx.stroke();
+            }
+        }
+
+    }
+    ctx.restore();
+}
+let a = new anim();
+a.generatePoint();
+console.log(a.arrayPoint);
+a.draw();
+setInterval(()=> {
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    a.move();
+    a.draw();
+    a.check();
+}, 5)
+
+// bug fixes
+
+// canvas stretch
+
+// points dont leave the canvas
+
+</script>
+</html>
