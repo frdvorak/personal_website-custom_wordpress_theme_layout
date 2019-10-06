@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Interactive backgrounds</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0 user-scalable=0">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+
+<style>
+body {
+	margin: 0; 
+	padding: 0;
+	font-family: 'Gugi', cursive;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+#canvas1 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1000;
+	//display: none;
+	overflow: hidden;
+	background: linear-gradient(#25364f, #4d71a5, #9bc4ff);
+}
+/****************************** MAIN PANEL with buttons ********************************/
+#controlsWrapper {
+	position: absolute;
+	width: auto;
+	min-width: 260px;
+	height: 152px;
+	top: 45%;
+	left: 0;
+	transform: translate(0, -50%);
+}
+#controls {
+	position: absolute;
+	width: 260px;
+	height: 152px;
+	//background: rgba(255,255,255,.1);
+	top: 0;
+	left: 0;
+	z-index: 100;
+	border-radius: 5px;
+}
+.button {
+	position: relative;
+	top:0; left: 0;
+	float: left;
+	width: 62.5px; height: 50px;
+	background: rgba(0,0,0,.5);
+	margin-right: 2px;
+	margin-top: 2px;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 30px;
+	color: rgba(255,255,255,0.7);
+	transition: .5s;
+}
+.button:hover, .button.active {
+	background: rgba(0,0,0,.9);
+	color: #fff;
+}
+.infoBoard1 {
+	position: relative;
+	width: 242px;
+	margin-top: 2px;
+	height: 40px;
+	top:0; left:0;
+	float: left;
+	background: rgba(0,0,0,.8);
+	border-radius: 5px;
+	padding: 0px 8px;
+	text-align: justify;
+	font-size: 15px;
+	line-height: 16px;
+	color: #fff;
+	overflow: visible;
+}
+.infoBoard2 {
+	position: relative;
+	width: 242px;
+	margin-top: 2px;
+	height: 70px;
+	top:0; left:0;
+	float: left;
+	background: rgba(0,0,0,.8);
+	border-radius: 5px;
+	padding: 8px;
+	text-align: justify;
+	font-size: 12px;
+	color: #fff;
+	//overflow: hidden;
+}
+
+.p_current_movement {
+	position: absolute;
+	top: 10px; left: 10px;
+	line-height: 10px;
+	margin-top: -10px;
+}
+.p_current_colour {
+	position: absolute;
+	top: 60px; left: 10px;
+	line-height: 10px;
+	margin-top: -10px;
+}
+.highlight {
+	color: #fff;
+	position: relative;
+	top: 3px;
+	left: 30px; 
+	font-size: 25px;
+	height: 10px;
+	display: block;
+	transform: rotateY(10deg) rotateZ(-5deg);
+	//animation: float 16s infinite;
+	animation: flip 0.6s forwards;
+	text-shadow: 1px -1px 3px #000,
+				-1px 1px 3px #000,
+				-1px -1px 3px #000,
+				1px 1px 3px #000
+				;
+}
+.highlight2 {
+	left: 50px;
+}
+@keyframes flip {
+0% {transform: rotateY(10deg) rotateZ(-5deg);}
+100% {transform: rotateY(-360deg) rotateZ(-5deg);}
+}
+.p_color {
+	position: absolute;
+	top: -8px; left: 3px;
+	width: 242px;
+	padding: 6px;
+}
+#slider {
+	width: 175px;
+	float: right;
+	position: absolute;
+	top: 2px; right: 10px;
+}
+/****************************** INFO (i icon in top left corner)********************************/
+.info {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	width: 35px; 
+	height: 35px;
+	background: rgba(0,0,0,.5);
+	border-radius: 5px;
+	transition: .5s;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	line-height: 35px;
+	z-index: 100;
+	overflow: hidden;
+	padding: 0 0;
+}
+.info:hover {
+	background: rgba(0,0,0,.9);
+	width: 210px;
+	height: 210px;
+	padding: 0 10px;
+}
+.info:hover p{
+	opacity: 1;
+}
+.info h3 {
+	font-size: 15px;
+	width: 200px;
+	text-align: center;
+	line-height: 10px;
+}
+.info p {
+	font-size: 11px;
+	line-height: 12px;
+	padding: 5px;
+	text-align: left;
+	opacity: 0;
+	transition: 1s;
+	width: 200px;
+}
+.info a {
+	font-size: 8px;
+	text-decoration: none;
+	line-height: 12px;
+	color: white;
+}
+/********************************** TOOLTIP on buttons *********************************/
+.tooltip {
+	filter: url(#goo);
+}
+.tooltip .bubble {
+	position: absolute;
+	background: #000;
+	border-radius: 50%;
+	color: white;
+	font-size: 9px;
+	text-align: center;
+	animation: move 10s forwards;
+	transform: scale(0);
+}
+.tooltip .bubble1 {
+	top:-10px; left:-10px;
+	width: 20px; height: 20px;
+	animation-delay: 0.6s;
+}
+.tooltip .bubble2 {
+	top:-30px; left:-50px;
+	width: 45px; height: 45px;
+	animation-delay: 0.25s;
+}
+.tooltip .bubble3 {
+	top:-20px; left:-120px;
+	width: 85px; height: 85px;
+	line-height: 90px;
+	animation-delay: 0s;
+}
+.tooltip2 .bubble1 {
+	top:10px; left:-20px;
+	width: 20px; height: 20px;
+}
+.tooltip2 .bubble2 {
+	top:25px; left:-40px;
+	width: 40px; height: 40px;
+
+}
+.tooltip2 .bubble3 {
+	top:40px; left:-115px;
+	width: 95px; height: 95px;
+	line-height: 90px;
+}
+@keyframes move {
+	0% {transform: scale(0);}
+	20% {transform: scale(0);}
+	35% {transform: scale(1.3);}
+	44% {transform: scale(0.85);}
+	55% {transform: scale(1.1);}
+	65% {transform: scale(0.85);}
+	75% {transform: scale(1.1);}
+	80% {transform: scale(0.85);}
+	97% {transform: scale(1.15);}
+	100% {transform: scale(0);}
+}
+svg {
+	display: none;
+}
+/**************************************************************************/
+/**************************************************************************/
+/********************** SMALL SCREENS (mobile) ****************************/
+/**************************************************************************/
+/**************************************************************************/
+@media screen and (max-width: 640px){
+	/*** remove tooltips on small screens ***/
+	.tooltip {
+		display: none;
+	}
+}
+</style>
+<body>
+<canvas id='canvas1'></canvas>	
+<div class='info'><i class="fas fa-info"></i>
+	<h3>Interactive Backgrounds</h3>
+	<p>Moving particles that react to mouse position/touch input. This code can be used as an interactive background for a website</p>
+	<p>Source code:
+	<a href='https://github.com/frdvorak/canvasparticles' target='_blank'>github.com/fdvorak/canvasparticles</a></p>
+</div>
+<div id='controlsWrapper'>
+	<div id='controls'>		
+		<div class='button button1 active' data-mode='Floating'>1</div>
+		<div class='button button2' data-mode='Falling bricks'>2</div>
+		<div class='button button3' data-mode='Cross streams'>3</div>
+		<div class='button button4' data-mode='Bouncing'>4</div>
+		<div class='button button5' data-mode='Bubbles'>5</div>
+		<div class='button button6' data-mode='Steam trail'>6</div>
+		<div class='button button7' data-mode='Falling trail'>7</div>
+		<div class='button button8' data-mode='Smoke trail'>8</div>
+		<div class='tooltip tooltip1'>
+			<div class='bubble bubble1'></div>
+			<div class='bubble bubble2'></div>
+			<div class='bubble bubble3'>Change movement</div>
+		</div>
+		<div class='infoBoard1'>
+			<div class='tooltip tooltip2'>
+				<div class='bubble bubble1'></div>
+				<div class='bubble bubble2'></div>
+				<div class='bubble bubble3'>Change colours</div>
+			</div>
+			<p class='p_color'>color: <input type='range' id='slider' name='slider' min='1' max='5' value='1'></p>
+		</div>
+		<div class='infoBoard2'>
+		<p class='p_current_movement'></p>
+		<p class='p_current_colour'></p>
+		</p>
+		</div>
+	</div>
+</div>
+<svg>
+	<defs>
+		<filter id='goo'>
+			<feGaussianBlur in='SourceGraphic' stdDeviation='10' result='blurName'/>
+			<feColorMatrix in='blurName' mode='matrix' values='	1 0 0 0 0
+															0 1 0 0 0 
+															0 0 1 0 0
+															0 0 0 16 -8 ' result='martixName'/>
+			<feBlend in='SourceGraphic' in2='martixName'/>
+		</filter>
+	</defs>
+</svg>
+<script>
+let activeEffect = 1;
+// CANVAS ///////////////////////////////////
+const canvas = document.getElementById("canvas1");
+const ctx = canvas.getContext("2d");
+ctx.canvas.width  = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
+
+// VARIABLES ///////////////////////////////////
+const slider = document.querySelector('#slider');
+let particleArray = [];
+let angle = 0;
+let sliderValue = 1;
+const p_current_movement = document.querySelector(".p_current_movement");
+const p_current_colour = document.querySelector(".p_current_colour");
+let current_colour = 'Mesoshphere';
+let activeMode = 'Floating';
+const tooltips = document.querySelectorAll('.tooltip');
+
+// REMOVE TOOLTIPS AFTER 15SEC //////////////
+setTimeout(function(){
+	console.log('tooltips removed from DOM');
+	tooltips.forEach(tooltip => tooltip.style.display='none');
+}, 15000);
+
+// GET MOUSE POSITION ///////////////////////////////
+let mouse = {
+	x: undefined,
+	y: undefined
+}
+let touch = {
+	x: undefined,
+	y: undefined
+}
+window.addEventListener('mousemove', 
+	function(event){
+		mouse.x = event.x;
+		mouse.y = event.y;
+		//console.log(mouse);
+});
+// SET MOUSE POSITION AS UNDEFINED EVERY 5 SEC(to prevent effect getting stuck in corners when mouse leaves window)//////
+setInterval(function(){
+	mouse.x = undefined;
+	mouse.y = undefined;
+	Touch.clientX = undefined;
+	Touch.clientY = undefined;
+}, 5000);
+
+// RANGE OF SIZES FOR PARTICLES (on mouse hover)
+let maxSize = innerWidth/17;
+let minSize = 3;
+
+// COLOUR SCHEMES https://color.adobe.com/create/color-wheel/
+const colorArray1 = [
+	'#DEFCF5',
+	'#BAFFE5',
+	'#FFF5F5',
+	'#A3FFE5',
+	'#96F0DE'
+];
+const colorArray2 = [
+	'#8C5523',
+	'#FFC38C',
+	'#FF9B40',
+];
+const colorArray3 = [
+	'#3B9994',
+	'#8BCCC9',
+	'#C8FFDD',
+	'#FF88AE',
+	'#CC6CBB'
+];
+const colorArray4 = [
+	'#9ec4f7',
+	'#21A4D3',
+	'#048CAC',
+	'#145674',
+	'#023855'
+];
+const colorArray5 = [
+	'rgba(0,0,0,0.05)',
+	'rgba(255,255,255,0.6)',
+	'rgba(255,255,255,0.2)'
+];
+
+// DISPLAY NAME OF ACTIVE EFFECT AND COLOUR
+function updateMovementLabel(){
+	p_current_movement.innerHTML = '<p>Movement mode:<span class="highlight highlight1">' + activeMode + '</span></p>'; 
+}
+function updateColourLabel(){
+	p_current_colour.innerHTML = '<p>Colour scheme: <span class="highlight highlight2">' + current_colour + '</span></p>'; 
+}
+updateMovementLabel();
+updateColourLabel();
+
+// CREATE PARTICLE OBJECT ///////////////////
+function Particle(x, y, dx, dy, size, color, density, bounceFactor, vy, randomize){
+	this.x = x;
+	this.y = y;
+	this.dx = dx;
+	this.dy = dy;
+	this.size = size;
+	this.minSize = size;
+	if (sliderValue == 1){
+		this.color = colorArray1[Math.floor(Math.random()*colorArray1.length)];
+	} else if (sliderValue == 2){
+		this.color = colorArray2[Math.floor(Math.random()*colorArray2.length)];
+	}else if (sliderValue == 3){
+		this.color = colorArray3[Math.floor(Math.random()*colorArray3.length)];
+	}else if (sliderValue == 4){
+		this.color = colorArray4[Math.floor(Math.random()*colorArray4.length)];
+	}else if (sliderValue == 5){
+		this.color = colorArray5[Math.floor(Math.random()*colorArray5.length)];
+	}
+	this.density = 0.3 + (Math.random() * 0.2)+0.1;
+	this.bounceFactor = 0.7;
+	this.vy = 1;
+	this.randomize = (Math.random() * 1)+15;
+	this.draw = function(){
+		//ctx.clearRect(0,0,innerWidth,innerHeight);
+		ctx.beginPath();
+		//ctx.fillText('Hello world', this.x, this.y);
+		ctx.arc(this.x,this.y,this.size,0,Math.PI * 2, false);
+		//ctx.strokeRect(this.x,this.y,this.size,this.size);
+		//ctx.fillRect(this.x,this.y,this.size,this.size);
+		if (sliderValue == 5){
+			ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+			ctx.stroke();
+		}
+		ctx.fillStyle = this.color;
+		ctx.fill();
+	}
+
+	this.update = function(){
+		//////////////////////////////// EFFECT 1 ////////////////////////////
+		if (activeEffect == 1){
+			if (this.x + this.size > canvas.width || this.x - this.size < 0){
+				this.dx = -this.dx;
+			}
+			if (this.y + this.size > canvas.height || this.y - this.size < 0){
+				this.dy = -this.dy;
+			}
+			this.x += this.dx; 
+			this.y += this.dy;
+
+			//interactivity mouse
+			if (mouse.x - this.x < 50 && mouse.x - this.x >-50 &&
+				mouse.y - this.y < 50 && mouse.y - this.y >-50){
+				if (this.size < maxSize){
+					this.size += 1;
+				}
+			}
+			else if (this.size > this.minSize){
+				this.size -= 0.1;
+			}
+	
+		}
+		//////////////////////////////// EFFECT 2 ////////////////////////////
+		if (activeEffect == 2){
+			//angle += 0.00001;
+				this.y += this.density*1.5;
+				//this.x += Math.sin(angle) * .1;
+				this.x -= 0.05;
+				this.size +=this.density*0.05;
+				// draw squares instead of circles
+				this.draw = function(){
+					ctx.beginPath();
+					ctx.fillStyle = this.color;
+					ctx.fillRect(this.x,this.y,this.size*5,this.size*5);
+					if (sliderValue == 5){
+						ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+						ctx.strokeRect(this.x,this.y,this.size*5,this.size*5);
+						//ctx.stroke();
+					}
+				}
+				//interactivity mouse
+				if (mouse.x - this.x < 50 && mouse.x - this.x >-50 &&
+				mouse.y - this.y < 50 && mouse.y - this.y >-50){
+				if (this.size < maxSize){
+					this.y += this.density*5;
+				}
+			}
+				// if it reaches bottom add new one to the top
+				if (this.y > canvas.height + 40){
+						this.size = 0;
+						this.x = Math.random() * (innerWidth - size * 2) + size;
+						this.y = (Math.random() * innerHeight/5)+innerHeight/4;
+				};
+		} 
+		//////////////////////////////// EFFECT 3 ////////////////////////////
+		if (activeEffect == 3){
+				this.size+=0.15;
+				if (this.x < innerWidth/2 && this.y < innerHeight/2){
+					this.x-=2;
+					this.y-=0.9 ;
+				}
+				if (this.x < innerWidth/2 && this.y > innerHeight/2){
+					this.x-=2;
+					this.y+=0.9;
+				}
+				if (this.x > innerWidth/2 && this.y > innerHeight/2){
+					this.x+=2;
+					this.y+=0.9;
+				}
+				if (this.x > innerWidth/2 && this.y < innerHeight/2){
+					this.x+=2;
+					this.y-=0.9;
+				}
+				if (this.x < 0-this.size || this.x > innerWidth+this.size){
+					this.x =  innerWidth/2 + (Math.random() * innerWidth/2)-innerWidth/4;
+					this.y =  innerHeight/2 + (Math.random() * innerHeight/2)-innerHeight/4;
+					this.size = 1;
+				}
+				if (this.y < 0-this.size || this.y > innerHeight+this.size){
+					this.x =  Math.random() * innerWidth;
+					this.y =  Math.random() * innerHeight;
+					this.size = 1;
+				}
+				//interactivity
+				if (mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
+				mouse.y - this.y < 50 && mouse.y - this.y >0){
+					this.y-=4;
+					//this.x+=(Math.random() * 1)-0.5;
+				}
+				if (mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
+				mouse.y - this.y < 0 && mouse.y - this.y >-50){
+					this.y+=4;
+					//this.x+=(Math.random() * 1)-0.5;
+				}
+		}
+		//////////////////////////////// EFFECT 4 ////////////////////////////
+		if (activeEffect == 4){
+				this.y += this.vy;
+				this.vy += this.density;
+				
+									
+				// if it reaches bottom bounce
+				if (this.y > canvas.height-this.size-2){
+						this.vy *= -this.bounceFactor;
+						this.density = this.density*0.9;
+				};
+				
+				// mouse interactivity
+				if ((this.y >= innerHeight - innerHeight/5) &&(mouse.x - this.x < 20 && mouse.x - this.x >-20 &&
+				mouse.y - this.y < 1250 && mouse.y - this.y >-1250)){
+					//this.x+=1;
+					this.vy-=2.7;
+					this.density = 0.7;
+				}
+				// fix to make sure particles don't sink below the viewport level
+				if (this.y > innerHeight-this.size) {
+					this.y-=3;
+				}
+		}
+		//////////////////////////////// EFFECT 5 ////////////////////////////
+		if (activeEffect == 5){
+				angle += this.density/innerWidth*50;
+				//this.vy += this.density;
+				this.y -= this.density+this.randomize/30;
+				this.x = this.x + Math.sin(angle);
+				this.size += this.density/2;
+				
+				this.draw = function(){
+					//stroke this for 'Outline' colour schmeme n.5
+					if (sliderValue == 5){
+						ctx.beginPath();
+						ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+						ctx.arc(this.x,this.y,this.size,0,Math.PI * 2, false);
+						ctx.stroke();
+						ctx.beginPath();
+						ctx.fillStyle = this.color;
+						ctx.arc(this.x,this.y,this.size,0,Math.PI * 2, false);
+						ctx.fill();
+					} else {
+					//or else fill smaller circle in each bubble to create 'reflection'
+					ctx.beginPath();
+					ctx.fillStyle = this.color;
+					ctx.arc(this.x,this.y,this.size,0,Math.PI * 2, false);
+					ctx.fill();
+					
+					ctx.beginPath();
+					ctx.fillStyle = 'rgba(255,255,255,0.5)';
+					ctx.arc(this.x-this.size/3,this.y-this.size/3,this.size/2,0,Math.PI * 2, false);
+					ctx.fill();
+					}
+				}
+			
+				//if it reaches 'maxSize-1' make it transparent
+				if (this.size > (maxSize-1)){
+						this.color = "rgba(255, 255, 255, 0.6)";
+				};
+				
+				//if it reaches 'maxSize+this.randomize' pop the bubble and add new one to the bottom of screen
+				if (this.size > maxSize+this.randomize){
+						this.y = innerHeight/2 + (Math.random()*innerHeight/4)+innerHeight/4;
+						this.x = (Math.random()*innerWidth*2)-innerWidth;
+						this.size = (Math.random() * 0.1)+0.1;
+						this.vy = 0.01;
+						// colours need to be reassigned because of addition of rgba transparency before it pops
+						if (sliderValue == 1){
+							this.color = colorArray1[Math.floor(Math.random()*colorArray1.length)];
+						}else if (sliderValue == 2){
+							this.color = colorArray2[Math.floor(Math.random()*colorArray2.length)];
+						} else if (sliderValue == 3){
+							this.color = colorArray3[Math.floor(Math.random()*colorArray3.length)];
+						} else if (sliderValue == 4){
+							this.color = colorArray4[Math.floor(Math.random()*colorArray4.length)];
+						} else if (sliderValue == 5){
+							this.color = colorArray5[Math.floor(Math.random()*colorArray5.length)];
+				};
+				}
+				//interactivity
+				if (mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
+				mouse.y - this.y < 50 && mouse.y - this.y >-50){
+					this.size+=2;
+				}
+		}
+		//////////////////////////////// EFFECT 6 ////////////////////////////
+		if (activeEffect == 6){
+			
+			if (this.x + this.size > canvas.width || this.x - this.size < 0){
+				this.dx = -this.dx;
+			}
+			if (this.y + this.size > canvas.height || this.y - this.size < 0){
+				this.dy = -this.dy;
+			}
+			this.x += this.dx; 
+			this.y += this.dy;
+
+			//interactivity mouse
+			if (mouse.x - this.x < 50 && mouse.x - this.x >-50 &&
+				mouse.y - this.y < 50 && mouse.y - this.y >-50){
+				if (this.size < maxSize){
+					this.size += 1;
+				}
+			}
+			else if (this.size > 0.11){
+				this.size -= 0.1;
+			}
+			else if (this.size = 0.1){
+				this.size = 0;
+			}
+		}
+		//////////////////////////////// EFFECT 7 ////////////////////////////
+		if (activeEffect == 7){
+			this.size-=0.05;
+			if (this.size < 0.1) {
+				this.x = (mouse.x + ((Math.random() * 20) - 10));
+				this.y = (mouse.y + ((Math.random() * 20) - 10));
+				this.size = Math.random()*10;
+				this.vy = ((Math.random()*1)-0.5);
+			}
+			this.y += this.vy;
+			this.vy += 0.1;
+								
+			// if it reaches bottom bounce
+			if (this.y > canvas.height-this.size){
+					this.vy *= -this.bounceFactor;
+			};
+		}
+		//////////////////////////////// EFFECT 8 ////////////////////////////
+		if (activeEffect == 8){
+			//this.size+=0.09;
+			if (this.size < 0.1) {
+				this.x = (mouse.x + ((Math.random() * 20) - 10));
+				this.y = (mouse.y + ((Math.random() * 20) - 10));
+				this.size = Math.random()*10;
+				this.vy = ((Math.random()*1)-0.5);
+			}
+			this.size+=this.density/1.2;
+			if (this.size > (10 + this.density*10)){
+				this.color = 'rgba(255,255,255,0.1)';
+			}
+			if (this.size > 23) {
+				this.x = (mouse.x + ((Math.random() * 20) - 10));
+				this.y = (mouse.y + ((Math.random() * 20) - 10));
+				this.size = 0;
+				this.vy = Math.random()*1.1;
+				// colors need to be reassigned because of addition of rgba effect above
+				if (sliderValue == 1){
+					this.color = colorArray1[Math.floor(Math.random()*colorArray1.length)];
+				}else if (sliderValue == 2){
+					this.color = colorArray2[Math.floor(Math.random()*colorArray2.length)];
+				} else if (sliderValue == 3){
+					this.color = colorArray3[Math.floor(Math.random()*colorArray3.length)];
+				} else if (sliderValue == 4){
+					this.color = colorArray4[Math.floor(Math.random()*colorArray4.length)];
+				} else if (sliderValue == 5){
+					this.color = colorArray5[Math.floor(Math.random()*colorArray5.length)];
+				}
+			}
+			this.y -= this.vy;
+			this.vy = Math.random()*1.1;					
+		}
+		
+	this.draw();
+	}
+}
+// RESIZE SETTING - empty and refill particle array every time window changes size + change canvas size
+window.addEventListener('resize',
+	function(){
+		canvas.width = innerWidth;
+		canvas.height = innerHeight;
+		maxSize = innerWidth/15;
+		init();
+	}
+)
+
+function init() {
+	// for effects <= 5 add amount of particles equal to 'innerWidth/2'
+	if (activeEffect <= 5){
+		particleArray = [];
+		for (let i = 0; i < innerWidth/2; i++){
+			let size = Math.random() * innerHeight/80 + innerHeight/350; //PARTICLE SIZE DEPENDING ON WINDOW HEIGHT
+			let x = Math.random() * (innerWidth - size * 2) + size;
+			let y = Math.random() * (innerHeight - size * 2) + size;
+			let dx = (Math.random() - 0.5) * .5;
+			let dy = (Math.random() - 0.5) * .5;
+			let density = Math.random() + 1 //determines how fast it falls;
+			particleArray.push(new Particle(x, y, dx, dy, size));
+		}
+	// for effects > 5 add amount of particles equal to 'innerWidth'
+	} else if (activeEffect > 5){
+		particleArray = [];
+		for (let i = 0; i < innerWidth; i++){
+			let size = 0;
+			let x = Math.random() * (innerWidth - size * 2) + size;
+			let y = Math.random() * (innerHeight - size * 2) + size;
+			let dx = (Math.random() - 0.5) * .5;
+			let dy = (Math.random() - 0.5) * .5;
+			let density = Math.random() + 1 //determines how fast it falls;
+			particleArray.push(new Particle(x, y, dx, dy, size));
+			let minSize = 0;
+			let maxSize = 20;
+		}
+	}
+}
+// ANIMATION LOOP ///////////////////////////////////////
+function animate(){
+	requestAnimationFrame(animate);
+	ctx.clearRect(0,0,innerWidth,innerHeight);
+	
+	for (let i = 0; i < particleArray.length; i++){
+		particleArray[i].update();
+	}
+}
+init();
+animate();
+
+//CONTROLS, BUTTONS ////////////////////////////
+const buttons = document.querySelectorAll('.button');
+buttons.forEach(button => button.addEventListener('click', function(){
+	//console.log(this.classList);
+	for (let i = 0; i < buttons.length; i++){
+		buttons[i].classList.remove('active');
+	}
+	this.classList.add('active');
+	activeEffect = this.textContent;
+	activeMode = this.dataset.mode;
+	//console.log(this.dataset.mode);
+	init();
+	updateMovementLabel();
+}))
+// COLOUR SLIDER INPUT /////////////////////////////
+slider.addEventListener('change', function(){
+	sliderValue = slider.value;
+	console.log(sliderValue);
+	if (sliderValue == 1) {
+		canvas.style.background = 'linear-gradient(#25364f, #4d71a5, #9bc4ff)';
+		current_colour = 'Mesoshphere';
+	}else if (sliderValue == 2) {
+		canvas.style.background = 'linear-gradient(#7F5026, #CC7C33)';
+		current_colour = 'Sandstorm';
+	}else if (sliderValue == 3) {
+		//canvas.style.background = 'linear-gradient(red 10%,yellow 50%, blue 90%)';
+		canvas.style.background = 'radial-gradient(#fff, #C8FFDD, #FF88AE)';
+		current_colour = 'Flower';
+	}else if (sliderValue == 4){
+		canvas.style.background = 'linear-gradient(to top left,  #000, #2FC1E4, white)';
+		current_colour = 'Ocean';
+	}else if (sliderValue == 5){
+		canvas.style.background = 'linear-gradient(to bottom, #d1d1d1, white 20%)';
+		current_colour = 'Outlines';
+	} else {
+		canvas.style.background = 'white';
+	}
+	init();
+	updateColourLabel();
+})
+
+
+</script>
+
+</body>
+</html>
+
