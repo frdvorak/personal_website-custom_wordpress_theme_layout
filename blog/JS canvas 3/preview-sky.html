@@ -138,7 +138,7 @@ function connect() {
                 //ctx.lineCap = 'round'; // for wide lines
                 //ctx.setLineDash([10]);
                 ctx.beginPath();
-                ctx.lineWidth = 1;
+                ctx.lineWidth = 5;
                 ctx.moveTo(particleArray[a].x, particleArray[a].y);
                 ctx.lineTo(particleArray[b].x, particleArray[b].y);
                 ctx.stroke();
@@ -153,8 +153,8 @@ function connect() {
 function init(){
     particleArray = [];
     let numberOfParticles = (canvas.height*canvas.width)/9000;
-    for (let i=0; i<numberOfParticles*3; i++){
-        let size = (Math.random()*5)+1;
+    for (let i=0; i<numberOfParticles*0.8; i++){
+        let size = (Math.random()*10)+5;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
         let directionX = (Math.random() * 5) - 2.5;

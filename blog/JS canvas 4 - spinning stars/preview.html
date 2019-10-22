@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>Spinning stars</title>
+    <style>
+        * {
+            padding: 0; margin: 0; box-sizing: border-box;
+        }
+        #canvas1 {
+            position: absolute;
+            top: 0; left: 0;
+	        width: 100%;
+	        height: 100%;
+            background: white;
+}
+
+    </style>
+</head>
+<body>
+    <canvas id='canvas1'></canvas>
+
+</body>
+<script>
+const canvas = document.getElementById("canvas1");
+const ctx = canvas.getContext("2d");
+canvas.width  = window.innerWidth;
+canvas.height = window.innerHeight;
+let particleArray = [];
+let wobble = 1;
+
+class Particle {
+    constructor(moveRadius, step, position, size){
+        this.moveRadius = moveRadius;
+        this.step = step;
+        this.position = position;
+        this.size = size;
+    }
+    draw() {
+        wobble+=.5;
+        ctx.beginPath();
+           /* ctx.strokeRect(Math.cos(this.position)*this.moveRadius + canvas.width/2, 
+            Math.sin(this.position)*this.moveRadius + canvas.height/2,this.size,this.size);*/
+        //smaller from center: ctx.arc(Math.cos(this.position)*this.moveRadius + canvas.width/2 , 
+          //  Math.sin(this.position)*this.moveRadius + canvas.height/2 ,((this.moveRadius/40)*2)+5,0,Math.PI*2);
+        ctx.arc(Math.cos(this.position)*this.moveRadius + canvas.width/2 , 
+          Math.sin(this.position)*this.moveRadius + canvas.height/2 ,this.size,0,Math.PI*2);
+        //ctx.arc(this.moveRadius, this.position, 10,0,Math.PI*2, false);
+        /*wobble+=1;
+    awStar(Math.cos(this.position)*this.moveRadius + canvas.width/2+Math.sin(wobble), 
+            Math.sin(this.position)*this.moveRadius + canvas.height/2+Math.sin(wobble), 5, this.size, this.size/2);
+        */
+        /*drawStar(Math.cos(this.position)*this.moveRadius + canvas.width/2, 
+            Math.sin(this.position)*this.moveRadius + canvas.height/2, 3, this.size, this.size/2);
+            */
+        ctx.closePath();
+        ctx.fillStyle = "white";
+        ctx.fill();
+        //ctx.strokeStyle = "white";
+        //ctx.lineWidth = 10;
+        //ctx.stroke();
+        //console.log('draw ' + this.position);
+    }
+    /*Awesome move
+    draw() {
+        wobble += .001;
+        let x = (Math.cos(this.position) + Math.sin(wobble))*this.moveRadius + canvas.width/2;
+        let y = (Math.sin(this.position) + Math.cos(wobble))*this.moveRadius + canvas.height/2;
+        ctx.beginPath();
+        ctx.arc(x, y, this.size, 0, Math.PI*2);
+        ctx.fillStyle = "gold";
+        ctx.fill();
+        ctx.closePath();
+        //ctx.strokeStyle = "white";
+        //ctx.stroke();
+    }
+    */
+    update(){
+        this.position += this.step;
+        this.draw();
+    }
+}
+
+// create particle array 
+function init(){
+    particleArray = [];
+    for (let i=0; i<500; i++){
+        let moveRadius = Math.random() * canvas.width;
+        let step = (Math.random() * 0.002)+0.002;
+        let position = Math.random() * (Math.PI * 2);
+        let size = (Math.random() * 8) + .5;
+
+        particleArray.push(new Particle(moveRadius, step, position, size));
+    }
+}
+
+// animation loop
+function animate(){
+    requestAnimationFrame(animate);
+    ctx.fillStyle = 'rgba(0,0,0,.01)';
+    //ctx.clearRect(0,0,innerWidth,innerHeight);
+	ctx.fillRect(0,0,innerWidth,innerHeight);
+	
+	for (let i = 0; i < particleArray.length; i++){
+        particleArray[i].update();
+	}
+}
+init();
+animate();
+
+// RESIZE SETTING - empty and refill particle array every time window changes size + change canvas size
+window.addEventListener('resize',
+	function(){
+		canvas.width = innerWidth;
+		canvas.height = innerHeight;
+		init();
+	}
+)
+
+function drawStar(positionX, positionY, spikes, outerRadius, innerRadius){
+      var rotation = Math.PI/2 * 3;
+      var x = positionX;
+      var y = positionY;
+      var step = Math.PI / spikes;
+
+      ctx.beginPath();
+      ctx.moveTo(positionX, positionY-outerRadius)
+      for(i=0; i<spikes; i++){
+        x = positionX + Math.cos(rotation) * outerRadius;
+        y = positionY + Math.sin(rotation) * outerRadius;
+        ctx.lineTo(x,y)
+        rotation += step
+
+        x = positionX + Math.cos(rotation) * innerRadius;
+        y = positionY + Math.sin(rotation) * innerRadius;
+        ctx.lineTo(x,y)
+        rotation += step
+      }
+      ctx.lineTo(positionX, positionY - outerRadius);
+      ctx.closePath();
+      ctx.lineWidth = 5;
+      //ctx.strokeStyle='gold';
+      //ctx.stroke();
+      //ctx.fillStyle='gold';
+      //ctx.fill();
+}
+
+</script>
+</html>

@@ -1,0 +1,802 @@
+ <!doctype html>
+<head>
+	<title>Drawing 2.4</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Stylish" rel="stylesheet">
+<style>
+* {opacity: 1; padding: 0; margin: 0;}
+
+body {
+	font-family: 'Stylish', sans-serif;
+}
+h1 {
+	color: #B0B0B0;
+	text-shadow: 	0.5px 0.5px 0px black,
+					1px 1px 0px black,
+					-0.5px -0.5px 0px black,
+					-1px -1px 0px black,
+					1.5px 1.5px 0px black,
+					-1.5px -1.5px 0px black
+	;
+}
+#canvas {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	border: 5px solid rgba(211,211,211,0);
+}
+.highlight {
+	animation: fade 5s forwards;
+}
+@keyframes fade {
+	0% 		{border: 5px solid rgba(211,211,211,1);}
+	95% 	{border: 5px solid rgba(211,211,211,0);}
+	100% 	{border: 5px solid rgba(211,211,211,0);}
+}
+#controls {
+	height: 100%;
+	position: absolute;
+	right: 0;
+	padding: 0 5px;
+	margin: 0;
+	overflow: hidden;
+	z-index: 10;
+	background: #B0B0B0;
+	border-left: 1px solid black;
+}
+.panel {
+	padding: 10px;
+	margin: 5px 0;
+	width: 300px;
+	position: relative;
+	z-index: 10;
+	border-radius: 2px;
+	width: 280px;
+	display: block;
+}
+.info {
+	font-size: 11px;
+	margin-left: 5px;
+	position: relative;
+	margin: auto;
+}
+p {
+	font-size: 13px;
+}
+input[type='color']{
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	margin-right: 3px;
+
+}
+input[type='checkbox']{
+	position: relative;
+	top: 5px;
+	width: 18px;
+	height: 18px;
+	border-radius: 2px;
+	margin-right: 3px;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+.pHighlight {
+	background: white;
+	position:relative;
+	left: -15px;
+	width: 315px;
+}
+/************* PANEL 1 *****************/
+
+.colorPickerInputStroke, .colorPickerInputFill {
+	float: left;
+}
+.panel1:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: 70%;
+	height: 100%;
+	z-index: -10;
+	border-bottom: 1px solid black;
+}
+.color {
+	padding: 5px;
+	height: 45px;
+	//border: 1px solid black;
+}
+.colorPickerLabelStroke, .colorPickerLabelFill{
+	position: absolute;
+	right: 18px;
+	line-height: 20px;
+	font-size: 23px;
+	font-weight: 900;
+	color: #B0B0B0;
+	text-transform: uppercase;
+	text-shadow: 	0.5px 0.5px 0px black,
+					1px 1px 0px black,
+					-0.5px -0.5px 0px black,
+					-1px -1px 0px black,
+					1.5px 1.5px 0px black,
+					-1.5px -1.5px 0px black
+	;
+}
+
+/************* PANEL 2 *****************/
+.brushSizeLabel {
+	
+}
+.autoBrush {
+	float: right;
+}
+.brushSizeP {
+	line-height: 25px;
+	//border: 1px solid black;
+}
+.brushSizeInput {
+	width: 100%;
+}
+
+/************* PANEL 3 *****************/
+.panel3 {
+	width: 300px;
+	//background-color: white;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+.panel3 .shape {
+	width: 23%;
+	height: 40px;
+	border: 1px solid black;
+	border-radius: 4px;
+	float: left;
+	margin: 2px;
+	background-color: lightgray;
+	overflow: hidden;
+}
+.panel3 .shape canvas{
+	position: relative;
+	left: 20%;
+	overflow: hidden;
+}
+.panel3 .activeShape {
+	background-color: #6e6e6e;
+}
+.brushPreview{
+	padding: 0;
+	margin: 0;
+	margin-left: 1%;
+	margin-top: 2px;
+	width: 290px;
+	border: 1px solid black;
+	background-color: lightgray;
+}
+.hideStrokeP {
+	position: absolute;
+	top: 110px;
+	left: 20px;
+}
+.hideFillP {
+	position: absolute;
+	top: 130px;
+	left: 20px;
+}
+/************* PANEL 4 *****************/
+.panel4 .tools {
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	border-radius: 4px;
+	float: left;
+	margin: 2px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	transition: .1s;
+	background-position: 50% 50%;
+	background-color: lightgray;
+}
+
+.brush {
+	background-image: url(images/brush.png);
+}
+.spray {
+	background-image: url(images/spray.png);
+}
+.eraser {
+	background-image: url(images/eraser.png);
+}
+.panel4 .dots {
+	background-image: url(images/dots.png);
+	background-size: 250%;
+}
+.delete {
+	background-image: url(images/bin.png);
+}
+.panel4 .activeTool {
+	background-color: #6e6e6e;
+	background-size: 80%;
+}
+.panel4 .dots.activeTool {
+	//outline: 3px solid #6e6e6e;
+	background-color: gray;
+	background-size: 190%;
+}
+
+.options {
+	border: 1px solid black;
+	border-radius:4px;
+	height: 42px;
+	width: 85px;
+	line-height: 42px;
+	font-size: 12px;
+	margin: 2px;
+}
+.options img {
+	position: relative;
+	top: 6px;
+	margin-right: 3px;
+	width: 25px;
+	height: 25px;
+}
+
+/************* PANEL 5 *****************/
+.panel5 {
+	//display: flex;
+}
+.effects {
+	display: block;
+	width: 14%;
+	height: 20px;
+	border: 1px solid black;
+	border-radius: 4px;
+	float: left;
+	margin: 2px;
+	font-size: 20px;
+	line-height: 20px;
+	text-align: center;
+	background-color: lightgray;
+}
+.activeEffect {
+	background-color: #6e6e6e;
+}
+.effectDescription {
+	//border: 1px solid black;
+	display: block;
+	height: 100%;
+	padding-top: 3px;
+	padding-right: 20px;
+	text-align: justify;
+	font-size: 11px;
+}
+.effectName {
+	position: relative;
+	margin-top: 25px;
+}
+</style> 
+</head>
+
+<body>
+
+<div id='wrapper'>
+	<canvas id='canvas' width='800' height='400'></canvas>
+	<div id='controls'>
+	
+	<div class='panel panel4'>
+		<h1>Draw</h1>
+		<p class='pHighlight'>v1.0 (05/04/2018) <a href='#'>frankslaboratory.co.uk/draw</a>
+		<p class='toolsLabel'>Tools: brush</p>
+		<div class='tools brush activeTool' data-tool='brush'></div>
+		<div class='tools spray' data-tool='spray'></div>
+		<div class='tools dots' data-tool='dots'></div>
+		<div class='tools eraser' data-tool='eraser'></div>
+
+		<button class='options deleteAll'><img src='images/bin.png'>Delete</button>
+	</div>
+	<div class='panel panel1'>
+		<div class='color'>
+			<input class='colorPickerInputStroke' type='color' value='#000000'>
+			<p>Stroke: <span class='colorPickerLabelStroke'>#000000</span></p>
+			<p><input type='checkbox' class='autoColorCheckboxStroke'><span class='autoColorLabelStroke'>Autocolor(stroke): OFF</span></p>
+		</div>
+		<div class='color'>
+			<input class='colorPickerInputFill' type='color' value='#d3d3d3'>
+			<p>Fill: <span class='colorPickerLabelFill'>#d3d3d3</span></p>
+			<p><input type='checkbox' class='autoColorCheckboxFill' checked=checked><span class='autoColorLabelFill'>Autocolor(fill): ON</span></p>
+		</div>
+		<span class='info'>Autocolor: if active, color will change automatically</span>
+		
+	</div>
+	<div class='panel panel2'>
+		<p class='brushSizeP'>Brush size: <span class='brushSizeLabel'>50px</span><span class = 'autoBrush'>
+		<input type='checkbox' class='autoBrushSizeCheckbox' checked=checked>
+		<span class='autoBrushSizeLabel'>Auto Brush Size: ON</span></span></p>
+		<input class='brushSizeInput' type='range' min='10' max='100' value='50'>
+	</div>
+	<div class='panel panel3'>
+		<div class='shape shape1 activeShape' data-shape='1'><canvas class='shape1canvas'><canvas></div>
+		<div class='shape shape2' data-shape='2'><canvas class='shape2canvas'><canvas></div>
+		<div class='shape shape3' data-shape='3'><canvas class='shape3canvas'><canvas></div>
+		<div class='shape shape4' data-shape='4'><canvas class='shape4canvas'><canvas></div>
+		<div class='shape shape5' data-shape='5'><canvas class='shape5canvas'><canvas></div>
+		<div class='shape shape6' data-shape='6'><canvas class='shape6canvas'><canvas></div>
+		<div class='shape shape7' data-shape='7'><canvas class='shape7canvas'><canvas></div>
+		<div class='shape shape8' data-shape='8'><canvas class='shape8canvas'><canvas></div>
+		<div>
+			<canvas class='brushPreview'></canvas>
+			<p class='hideStrokeP'><input type='checkbox' class='hideStroke' ><span class='hideStrokeLabel'>Hide stroke</span></p>
+			<p class='hideFillP'><input type='checkbox' class='hideFill' ><span class='hideFillLabel'>Hide fill</span></p>
+		</div>
+	</div>
+
+	<div class='panel panel5'>
+		<div class='effects effect1 activeEffect' data-effect='source-over' data-details=''>X</div>
+		<div class='effects effect2' data-effect='destination-over' data-details='New shapes are drawn behind the existing canvas content.'>1</div>
+		<div class='effects effect3' data-effect='lighter' data-details='Where both shapes overlap the color is determined by adding color values.'>2</div>
+		<div class='effects effect4' data-effect='xor' data-details='Shapes are made transparent where both overlap and drawn normal everywhere else.'>3</div>
+		<div class='effects effect5' data-effect='multiply' data-details='The pixels are of the top layer are multiplied with the corresponding pixel of the bottom layer. A darker picture is the result.'>4</div>
+		<div class='effects effect6' data-effect='screen' data-details='The pixels are inverted, multiplied, and inverted again. A lighter picture is the result (opposite of multiply)'>5</div>
+		<p class='effectName'>Effects: no effect</p>
+		<span class='effectDescription'></span>
+	</div>
+	
+	</div><!-- CONTROLS END -->
+</div><!-- WRAPPER END -->
+
+<script>
+// VARIABLES
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+const controls = document.querySelector('#controls');
+console.log(controls.style);
+// CANVAS SIZE
+ctx.canvas.width  = window.innerWidth - 290;
+ctx.canvas.height = window.innerHeight;
+let isDrawing = false;
+let direction = true;
+
+
+const panel1 = document.querySelector('.panel1');
+const panel2 = document.querySelector('.panel2');
+const panel3 = document.querySelector('.panel3');
+	//color
+const colorPickerLabelStroke = document.querySelector('.colorPickerLabelStroke');
+const colorPickerInputStroke = document.querySelector('.colorPickerInputStroke');
+const autoColorCheckboxStroke = document.querySelector('.autoColorCheckboxStroke');
+const autoColorLabelStroke = document.querySelector('.autoColorLabelStroke');
+const autoColorCheckboxFill = document.querySelector('.autoColorCheckboxFill');
+const autoColorLabelFill = document.querySelector('.autoColorLabelFill');
+const colorPickerInputFill = document.querySelector('.colorPickerInputFill');
+const colorPickerLabelFill = document.querySelector('.colorPickerLabelFill');
+let hue = 0;
+let hue2 = Math.floor((Math.random()*360)-360);
+
+
+
+let hiddenStroke = false;
+let hiddenFill = false;
+colorPickerLabelStroke.textContent = colorPickerInputStroke.value;
+colorPickerLabelFill.textContent = colorPickerInputFill.value;
+let autoColorStroke = false;
+let autoColorFill = true;
+
+let autoBrushSize = true;
+let transparentStroke = false;
+let transparentFill = false;
+
+	//brush
+const brushSizeLabel = document.querySelector('.brushSizeLabel');
+const brushSizeInput = document.querySelector('.brushSizeInput');
+const autoBrushSizeCheckbox = document.querySelector('.autoBrushSizeCheckbox');
+const autoBrushSizeLabel = document.querySelector('.autoBrushSizeLabel');
+
+	//shape
+const allShapeButtons = document.querySelectorAll('.shape');
+const shape1button = document.querySelector('.shape1');
+const shape2button = document.querySelector('.shape2');
+const shape3button = document.querySelector('.shape3');
+const shape4button = document.querySelector('.shape4');
+const shape5button = document.querySelector('.shape5');
+const shape6button = document.querySelector('.shape6');
+const shape7button = document.querySelector('.shape7');
+const shape8button = document.querySelector('.shape8');
+let activeShape = 1;
+const hideStroke = document.querySelector('.hideStroke');
+const hideStrokeLabel = document.querySelector('.hideStrokeLabel');
+const hideFill = document.querySelector('.hideFill');
+const hideFillLabel = document.querySelector('.hideFillLabel');
+
+	//tools
+const allToolsButtons = document.querySelectorAll('.tools');
+const brush = document.querySelector('.brush');
+const spray = document.querySelector('.spray');
+const dots = document.querySelector('.dots');
+const eraser = document.querySelector('.eraser');
+const toolsLabel = document.querySelector('.toolsLabel');
+let activeTool = 'brush';
+const deleteAll = document.querySelector('.deleteAll');
+deleteAll.addEventListener('click', function(){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+})
+
+	//effects
+const allEffectsButtons = document.querySelectorAll('.effects');
+const effect1 = document.querySelector('.effect1');
+const effect2 = document.querySelector('.effect2');
+const effect3 = document.querySelector('.effect3');
+const effect4 = document.querySelector('.effect4');
+const effect5 = document.querySelector('.effect5');
+const effect6 = document.querySelector('.effect6');
+const effectName = document.querySelector('.effectName');
+const effectDescription = document.querySelector('.effectDescription');
+let actEffect = 'source-over';
+
+const shapeButtons = function(){
+////////////PANEL 3 SHAPE ICONS !!!!!!!!!//////////////////////////////
+		// shape 1 canvas
+	const shape1canvas = document.querySelector('.shape1canvas');
+	
+	ctx1 = shape1canvas.getContext('2d');
+	ctx1.clearRect(0,0,shape1canvas.width, shape1canvas.height);
+	drawShape(20,20,12,13,13, ctx1);
+		// shape 2 canvas
+	const shape2canvas = document.querySelector('.shape2canvas');
+	ctx2 = shape2canvas.getContext('2d');
+	ctx2.clearRect(0,0,shape2canvas.width, shape2canvas.height);
+	drawShape(20,20,2,11,11, ctx2);
+		// shape 3 canvas
+	const shape3canvas = document.querySelector('.shape3canvas');
+	ctx3 = shape3canvas.getContext('2d');
+	ctx3.clearRect(0,0,shape3canvas.width, shape3canvas.height);
+	drawShape(20,16,3,8,16, ctx3);
+		// shape 4 canvas
+	const shape4canvas = document.querySelector('.shape4canvas');
+	ctx4 = shape4canvas.getContext('2d');
+	ctx4.clearRect(0,0,shape4canvas.width, shape4canvas.height);
+	drawShape(20,20,4,15,8, ctx4);
+		// shape 5 canvas
+	const shape5canvas = document.querySelector('.shape5canvas');
+	ctx5 = shape5canvas.getContext('2d');
+	ctx5.clearRect(0,0,shape5canvas.width, shape5canvas.height);
+	drawShape(20,20,5,15,8, ctx5);
+		// shape 6 canvas
+	const shape6canvas = document.querySelector('.shape6canvas');
+	ctx6 = shape6canvas.getContext('2d');
+	ctx6.clearRect(0,0,shape6canvas.width, shape6canvas.height);
+	drawShape(20,20,6,15,8, ctx6);
+		// shape 7 canvas
+	const shape7canvas = document.querySelector('.shape7canvas');
+	ctx7 = shape7canvas.getContext('2d');
+	ctx7.clearRect(0,0,shape7canvas.width, shape7canvas.height);
+	drawShape(20,20,12,11,6, ctx7);
+		// shape 8 canvas
+	const shape8canvas = document.querySelector('.shape8canvas');
+	ctx8 = shape8canvas.getContext('2d');
+	ctx8.clearRect(0,0,shape8canvas.width, shape8canvas.height);
+	drawShape(20,20,3,15,15, ctx8);
+}
+shapeButtons();
+
+// ACTIVE BRUSH PREVIEW CANVAS //////////////////////////
+const previewCanvas = document.querySelector('.brushPreview');
+ctxPreview = previewCanvas.getContext('2d');
+drawShape(150,75,50,brushSizeInput.value*0.7,brushSizeInput.value*0.7, ctxPreview);
+
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// MAIN MENU FUNCTION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const menuFunction = function(e){
+	colorPickerLabelStroke.textContent = colorPickerInputStroke.value;
+	colorPickerLabelFill.textContent = colorPickerInputFill.value;
+	//// autocolor
+	if (autoColorCheckboxFill.checked) {
+		autoColorLabelFill.textContent = 'Autocolor(fill): ON';
+		autoColorFill = true;
+	} else {
+		autoColorLabelFill.textContent = 'Autocolor(fill): OFF';
+		autoColorFill = false;
+	}
+	if (autoColorCheckboxStroke.checked) {
+		autoColorLabelStroke.textContent = 'Autocolor(stroke): ON';
+		autoColorStroke = true;
+	} else {
+		autoColorLabelStroke.textContent = 'Autocolor(stroke): OFF';
+		autoColorStroke = false;
+	}
+	//// hidden stroke/fill
+	if (hideStroke.checked){
+		hideStrokeLabel.textContent = 'Show stroke';
+	} else {
+		hideStrokeLabel.textContent = 'Hide stroke';
+	}
+	if (hideFill.checked){
+		hideFillLabel.textContent = 'Show fill';
+	} else {
+		hideFillLabel.textContent = 'Hide fill';
+	}
+	
+	//BRUSH SIZE
+	brushSizeLabel.textContent = brushSizeInput.value + 'px';
+	if (autoBrushSizeCheckbox.checked)  {
+		autoBrushSizeLabel.textContent = 'Auto Brush Size: ON';
+		autoBrushSize = true;
+	} else {
+		autoBrushSizeLabel.textContent = 'Auto Brush Size: OFF';
+		autoBrushSize = false;
+	}
+	
+	//Tools
+	if (this.classList.value.includes('tools')){
+		for (i=0; i<allToolsButtons.length; i++){
+			allToolsButtons[i].classList.remove('activeTool');
+		}
+		this.classList.add('activeTool');
+		activeTool = this.dataset.tool;
+		console.log(activeTool);
+		toolsLabel.textContent = 'Tools: ' + this.dataset.tool;
+	}
+	
+	// EFFECTS
+	if (this.classList.value.includes('effects')){
+		for (i=0; i<allEffectsButtons.length; i++){
+			allEffectsButtons[i].classList.remove('activeEffect');
+		}
+		this.classList.add('activeEffect');
+		actEffect = this.dataset.effect;
+		if (actEffect == 'source-over'){
+			effectName.textContent = 'Effect: no effect' ;
+		} else {
+			effectName.textContent = 'Effect: ' + this.dataset.effect;
+		}
+		effectDescription.textContent = this.dataset.details;
+				
+		
+		console.log(actEffect);
+	}
+	
+	//SHAPE
+	if (this.classList.value.includes('shape')){
+		for (i=0; i<allShapeButtons.length; i++){
+			allShapeButtons[i].classList.remove('activeShape');
+		}
+		this.classList.add('activeShape');
+		activeShape = this.dataset.shape;
+	}
+	// Brush previw canvas, must be after SHAPE
+	//brushPreview
+	ctxPreview.clearRect(0,0,400,400);
+		if (activeShape == 1){
+			drawShape(150,75,50,brushSizeInput.value*0.7,brushSizeInput.value*0.7, ctxPreview);
+		} else if (activeShape == 2){
+			drawShape(150,75,2,brushSizeInput.value*0.7,brushSizeInput.value*0.7, ctxPreview);
+		} else if (activeShape == 3){
+			drawShape(150,65,3,brushSizeInput.value*0.35,brushSizeInput.value*0.7, ctxPreview);
+		} else if (activeShape == 4){
+			drawShape(150,75,4,brushSizeInput.value*0.7,brushSizeInput.value*0.35, ctxPreview);
+		} else if (activeShape == 5){
+			drawShape(150,79,5,brushSizeInput.value*0.7,brushSizeInput.value*0.35, ctxPreview);
+		} else if (activeShape == 6){
+			drawShape(150,75,6,brushSizeInput.value*0.7,brushSizeInput.value*0.30, ctxPreview);
+		} else if (activeShape == 7){
+			drawShape(150,75,11,brushSizeInput.value*0.7,brushSizeInput.value*0.3, ctxPreview);
+		} else if (activeShape == 8){
+			drawShape(150,75,3,brushSizeInput.value*0.7,brushSizeInput.value*0.7, ctxPreview);
+		} else {
+		drawShape(150,73,12,brushSizeInput.value*0.7,brushSizeInput.value*0.7, ctxPreview);
+		}
+		return activeShape;
+}
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// DRAW SHAPE FUNCTION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		function drawShape(cx,cy,spikes,outerRadius,innerRadius, canvasID){
+			canvasID.fillStyle = colorPickerInputFill.value;
+			canvasID.strokeStyle = colorPickerInputStroke.value;			
+				//autoColorStroke
+			if ((autoColorStroke) && (activeTool != 'eraser')) {
+				hue++;
+				if (hue >= 360){
+					hue = 0;
+				};
+				//console.log(hue);
+				canvasID.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+			}
+			if ((autoColorFill) && (activeTool != 'eraser')) {
+				hue2++;
+				if (hue2 >= 360){
+					hue2 = 0;
+				};
+				//console.log(hue);
+				canvasID.fillStyle = `hsl(${hue2}, 100%, 50%)`;
+			}
+			// ACTIVE EFFECT /////////////////////////////////////////////////////////
+			canvasID.globalCompositeOperation = actEffect;
+			//ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+			
+			//canvasID.fillStyle = colorPickerInputFill.value; 
+			//canvasID.strokeStyle = colorPickerInputStroke.value; 
+			if (hideFill.checked) {
+				canvasID.fillStyle = 'rgba(0,0,0,0)'; 
+			}
+			if (hideStroke.checked) {
+				canvasID.strokeStyle = 'rgba(0,0,0,0)'; 
+			}
+   			var rot=Math.PI/2*3;
+   			var x=cx;
+    		var y=cy;
+   			var step=Math.PI/spikes;
+
+   			canvasID.beginPath();
+    		canvasID.moveTo(cx,cy-outerRadius)
+    		for(i=0;i<spikes;i++){
+        		x=cx+Math.cos(rot)*outerRadius;
+
+        		y=cy+Math.sin(rot)*outerRadius;
+        		canvasID.lineTo(x,y);
+        		rot+=step;
+
+        		x=cx+Math.cos(rot)*innerRadius;
+        		y=cy+Math.sin(rot)*innerRadius;
+       			canvasID.lineTo(x,y);
+        		rot+=step;
+      		}
+      		canvasID.lineTo(cx,cy-outerRadius);
+      		canvasID.closePath();
+      		canvasID.lineWidth=4;
+      
+      		canvasID.stroke();
+       		canvasID.fill();
+}
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// MAIN DRAW FUNCTION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+function drawFunction(e){
+	if (!isDrawing){
+		return;
+	}
+	let brushSize = brushSizeInput.value;
+	let lastX = e.clientX + window.scrollX;
+	let lastY = e.clientY + window.scrollY;
+	//colorPickerInputFill.value = ctx.fillStyle;
+	//colorPickerInputStroke.value = ctx.strokeStyle;
+
+	// autoBrushSize;
+	if ((autoBrushSize) && (activeTool != 'eraser')){
+		if (brushSize >= 100 || brushSize <= 10){
+				direction = !direction;
+			}
+		if (direction) {
+				brushSizeInput.value++;
+			} else {
+				brushSizeInput.value--;
+		}
+		brushSize = brushSizeInput.value;
+	}
+		
+	// BRUSH ////////////////////////////////////////////
+	if (activeTool == 'brush'){
+		if (activeShape == 1){
+			drawShape(lastX,lastY,50, brushSize, brushSize, ctx);
+		} else if (activeShape == 2){
+			drawShape(lastX,lastY,2, brushSize, brushSize, ctx);
+		} else if (activeShape == 3){
+			drawShape(lastX,lastY,3, brushSize*0.5, brushSize, ctx);
+		} else if (activeShape == 4){
+			drawShape(lastX,lastY,4, brushSize, brushSize*0.5, ctx);
+		} else if (activeShape == 5){
+			drawShape(lastX,lastY,5, brushSize, brushSize * .5, ctx);
+		} else if (activeShape == 6){
+			drawShape(lastX,lastY,6, brushSize, brushSize *.5, ctx);
+		} else if (activeShape == 7){
+			drawShape(lastX,lastY,11, brushSize, brushSize * .5, ctx);
+		} else if (activeShape == 8){
+			drawShape(lastX,lastY,3, brushSize, brushSize, ctx);
+		} else {
+			drawShape(lastX,lastY,12, brushSize, brushSize, ctx);
+	}
+	}
+	// SPRAY ///////////////////////////////////
+	else if (activeTool == 'spray'){
+			let randomX = (Math.random() * 50) - 25;
+			let randomY = (Math.random() * 50) - 25;
+			let randomSize = (Math.random() * 0.6) - 0.55;
+			brushSize = brushSize * randomSize;
+			if (activeShape == 1){
+				drawShape(lastX + randomX,lastY + randomY,50, brushSize*1.1, brushSize*1.1, ctx);
+			} else if (activeShape == 2){
+				drawShape(lastX + randomX,lastY + randomY,2, brushSize, brushSize, ctx);
+			} else if (activeShape == 3){
+				drawShape(lastX + randomX,lastY + randomY,3, brushSize*0.5, brushSize, ctx);
+			} else if (activeShape == 4){
+				drawShape(lastX + randomX,lastY + randomY,4, brushSize, brushSize*0.5, ctx);
+			} else if (activeShape == 5){
+				drawShape(lastX + randomX,lastY + randomY,5, brushSize, brushSize * .5, ctx);
+			} else if (activeShape == 6){
+				drawShape(lastX + randomX,lastY + randomY,6, brushSize, brushSize *.5, ctx);
+			} else if (activeShape == 7){
+				drawShape(lastX + randomX,lastY + randomY,11, brushSize, brushSize * .5, ctx);
+			} else if (activeShape == 8){
+				drawShape(lastX + randomX,lastY + randomY,3, brushSize, brushSize, ctx);
+			} else {
+				drawShape(lastX + randomX,lastY + randomY,12, brushSize, brushSize, ctx);
+			}	
+	}  
+	// DOTS ///////////////////////////////////
+	else if (activeTool == 'dots'){
+			let randomX = Math.random() * canvas.width;
+			let randomY = Math.random() * canvas.height;
+			let randomSize = (Math.random() * 0.6) - 0.55;
+			brushSize = brushSize * randomSize;
+			if (activeShape == 1){
+					drawShape(randomX, randomY, 50, brushSize*1.1, brushSize*1.1, ctx);
+			} else if (activeShape == 2){
+				drawShape(randomX, randomY, 2, brushSize, brushSize, ctx);
+			} else if (activeShape == 3){
+				drawShape(randomX, randomY, 3, brushSize*0.5, brushSize, ctx);
+			} else if (activeShape == 4){
+				drawShape(randomX, randomY, 4, brushSize, brushSize*0.5, ctx);
+			} else if (activeShape == 5){
+				drawShape(randomX, randomY, 5, brushSize, brushSize * .5, ctx);
+			} else if (activeShape == 6){
+				drawShape( randomX, randomY, 6, brushSize, brushSize *.5, ctx);
+			} else if (activeShape == 7){
+				drawShape(randomX, randomY, 11, brushSize, brushSize * .5, ctx);
+			} else if (activeShape == 8){
+				drawShape(randomX, randomY, 3, brushSize, brushSize, ctx);
+			} else {
+				drawShape(randomX, randomY, 12, brushSize, brushSize, ctx);
+			}	
+	}  
+	// ERASER /////////////////////////////////
+	else if (activeTool = 'eraser'){
+			ctx.clearRect(lastX - 25, lastY - 25, 50, 50);
+	}
+}
+
+// EVENT LISTENERS - need to be at the END
+canvas.addEventListener('click', menuFunction);
+//panel1.addEventListener('click', menuFunction);
+panel1.addEventListener('change', menuFunction);
+panel2.addEventListener('change', menuFunction);
+panel3.addEventListener('change', menuFunction);
+allShapeButtons.forEach(shapeButton => shapeButton.addEventListener('click', menuFunction));
+allToolsButtons.forEach(toolButton => toolButton.addEventListener('click', menuFunction));
+allEffectsButtons.forEach(effectButton => effectButton.addEventListener('click', menuFunction));
+/*window.addEventListener('resize', function(){
+	ctx.canvas.width  = window.innerWidth;
+	ctx.canvas.height = window.innerHeight;
+});*/
+
+canvas.addEventListener('mousemove', drawFunction);
+canvas.addEventListener('mousedown', drawFunction);
+canvas.addEventListener('mousedown', () => isDrawing = true);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+canvas.addEventListener('mouseup', function(){
+	colorPickerInputFill.value = ctx.fillStyle;
+	colorPickerInputStroke.value = ctx.strokeStyle;
+	shapeButtons();
+});
+window.addEventListener('resize', function(){
+	canvas.classList.add('highlight');
+	setTimeout(removeClass,5000);
+	function removeClass(){
+		canvas.classList.remove('highlight');
+	}
+})
+
+
+
+</script>
+</body>
+</html>
