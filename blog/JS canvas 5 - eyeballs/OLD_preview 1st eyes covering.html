@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet">
+    <title>Spinning stars</title>
+    <style>
+        * {
+            padding: 0; margin: 0; box-sizing: border-box;
+        }
+        #canvas1 {
+            position: absolute;
+            top: 0; left: 0;
+	        width: 100%;
+	        height: 100%;
+            background: black;
+}
+
+    </style>
+</head>
+<body>
+    <canvas id='canvas1'></canvas>
+
+</body>
+<script>
+const canvas = document.getElementById("canvas1");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let eyes = [];
+let theta = 1.57;
+
+const mouse = {
+    x: undefined,
+    y: undefined
+}
+
+window.addEventListener('mousemove', function(e){
+    mouse.x = event.x;
+    mouse.y = event.y;
+    //console.log(mouse.x);
+    //console.log(eyes);
+});
+
+class Eye {
+    
+    constructor(x, y, radius){
+        this.x = x;
+        this.y = y;
+        //this.theta = 1.57;
+        this.radius = radius;
+        //this.mx = 0;
+        //this.my = 0;
+        //this.dx = 0; //adjacent
+        //this.dy = 0; //opposite
+    }
+    
+    draw(){
+        // draw eyelid
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius*1.35, 0, Math.PI * 2, true);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        ctx.closePath();
+
+        // draw eye
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+/*
+        // wink
+        if (    mouse.x - this.x < this.radius*2
+        &&  mouse.x - this.x > -this.radius*2
+        &&  mouse.y - this.y < this.radius*2
+        &&  mouse.y - this.y > -this.radius*2) {
+            //ctx.rotate(5);
+            ctx.fillStyle = "black";
+        } else {
+            ctx.fillStyle = "white";
+        }*/
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.closePath();
+
+        //draw spot
+        // draw pupil
+        let spotdx = mouse.x - this.x;
+        let spotdy = mouse.y - this.y;
+        theta = Math.atan2(spotdy, spotdx);
+        let spotpupilx = this.x + Math.cos(theta) * this.radius/10;
+        let spotpupily = this.y + Math.sin(theta) * this.radius/10;
+        let spotpupilRadius = this.radius / 1.2;
+        ctx.beginPath();
+        ctx.arc(spotpupilx, spotpupily, spotpupilRadius, 0, Math.PI * 2, true);
+        ctx.fillStyle = "white";
+        ctx.fill();
+        ctx.closePath();
+
+        // draw pupil
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        theta = Math.atan2(dy, dx);
+        let pupilRadius = this.radius / 2.5;
+        let pupilx = this.x + Math.cos(theta) * this.radius/1.9;
+        let pupily = this.y + Math.sin(theta) * this.radius/1.9;
+        //let pupilRadius = this.radius / 2.5;
+        /*
+        let pupilMin = 1;
+        let pupilMax = 2500;
+        if (    mouse.x - this.x < this.radius*2
+        &&  mouse.x - this.x > -this.radius*2
+        &&  mouse.y - this.y < this.radius*2
+        &&  mouse.y - this.y > -this.radius*2
+        &&  pupilRadius < pupilMax) {
+            pupilRadius++;
+        } else if (pupilRadius > pupilMin) {
+            pupilRadius--;
+        }*/
+        ctx.beginPath();
+        ctx.arc(pupilx, pupily, pupilRadius, 0, Math.PI * 2, true);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        ctx.closePath();
+    }
+}
+
+function init(){
+    eyes = [];
+    for (let i = 0; i < 200; i++) {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        let radius = Math.floor(Math.random() * 60) + 10;
+
+        eyes.push(new Eye(x, y, radius));
+    }
+}
+
+function animate(){
+    requestAnimationFrame(animate);
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    for (let i = 0; i < eyes.length; i++){
+        eyes[i].draw();
+    }
+}
+init();
+animate();
+
+/*
+let theta = 1.57;
+let mx = 0;
+let my = 0;
+let dx; // Adjacent
+let dy; // Opposite
+
+
+const draw = () => {
+  const eye = {
+    x: width / 2,
+    y: height / 2,
+    radius: 50
+  };
+
+  dx = mx - eye.x;
+  dy = my - eye.y;
+  theta = Math.atan2(dy, dx);
+
+  const pupil = {
+    x: eye.x + Math.cos(theta) * 20,
+    y: eye.y + Math.sin(theta) * 20,
+    radius: eye.radius / 2
+  };
+
+  ctx.clearRect(0, 0, width, height);
+*/
+  /* Draw Eye *//*
+  ctx.beginPath();
+  ctx.arc(eye.x, eye.y, eye.radius, 0, Math.PI * 2, true);
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.fill();
+  ctx.closePath();*/
+
+  /* Draw Pupil *//*
+  ctx.beginPath();
+  ctx.arc(pupil.x, pupil.y, pupil.radius, 0, Math.PI * 2, true);
+  ctx.fillStyle = "rgb(0, 0, 0)";
+  ctx.fill();
+  ctx.closePath();
+
+  window.requestAnimationFrame(draw);
+};
+
+const handleResize = () => {
+  console.log("resize");
+  width = window.innerWidth;
+  height = window.innerHeight;*/
+
+  /* Set the size on canvas instead of CSS to avoid strecthing *//*
+  canvas.width = width;
+  canvas.height = height;
+};
+
+const handleMousemove = e => {
+  mx = e.clientX;
+  my = e.clientY;
+};
+
+window.addEventListener("resize", handleResize);
+window.addEventListener("mousemove", handleMousemove);
+handleResize();
+draw();*/
+</script>
+</html>
