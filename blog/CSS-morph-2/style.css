@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    width: 200px;
+    height: 200px;
+    perspective: 700px;
+    margin: 250px auto;
+}
+.box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(30deg);
+}
+.side {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(30,67,125,.5);
+}
+.side--front {
+    transform: rotateY(0) translateZ(100px);
+    background-color: #0e76a8;
+}
+.side--left {
+    transform: rotateY(-90deg) translateZ(100px);
+    background-color: #128ec9;
+}
+.side--top {
+    transform: rotateX(90deg) translateZ(100px);
+    background-color: #0b5d85;
+}
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    width: 100%;
+    font-family: Impact, sans-serif;
+    font-size: 40px;
+    transition: .5s;
+    transform-origin: left;
+    text-align: left;
+    padding-left: 20px;
+}
+button:hover {
+    padding-left: 210px;
+}
+.shape {
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    left: -300px;
+    top: -80px;
+    background-color: black;
+    z-index: -10;
+    transition: 1s;
+    animation: float 10s infinite;
+    -webkit-clip-path: polygon(90px 26px,69px 22px,86px 55px,58px 19px,41px 43px,69px 79px,34px 51px,22px 74px,46px 102px,17px 85px,27px 90px,13px 93px,10px 112px,7px 127px,29px 135px,9px 139px,14px 177px,32px 184px,18px 192px,40px 196px,21px 202px,30px 218px,74px 209px,72px 223px,69px 239px,75px 258px,83px 273px,100px 285px,117px 293px,139px 296px,162px 293px,184px 288px,203px 281px,219px 271px,232px 257px,243px 243px,253px 228px,260px 212px,262px 191px,267px 170px,260px 155px,240px 156px,234px 172px,229px 188px,221px 206px,213px 228px,198px 248px,176px 262px,149px 265px,126px 258px,111px 245px,109px 229px,117px 207px,123px 188px,141px 178px,147px 168px,135px 167px,148px 163px,153px 148px,135px 145px,153px 142px,156px 125px,141px 124px,157px 118px,159px 103px,147px 105px,159px 98px,167px 90px,162px 84px,168px 80px,176px 77px,186px 90px,188px 107px,201px 114px,212px 105px,229px 106px,237px 98px,237px 88px,231px 82px,224px 75px,210px 62px,199px 48px,207px 32px,194px 21px,182px 9px,146px 9px,132px 20px,127px 40px,121px 52px,107px 60px);
+}
+button:nth-child(1):hover ~ .shape {
+    -webkit-clip-path: polygon(96px 35px,74px 26px,84px 56px,63px 18px,45px 45px,68px 80px,38px 53px,26px 81px,45px 104px,18px 94px,27px 95px,17px 97px,18px 117px,18px 131px,28px 138px,16px 142px,21px 180px,33px 186px,22px 195px,41px 198px,27px 204px,38px 218px,75px 210px,79px 225px,86px 245px,88px 260px,101px 276px,119px 285px,142px 287px,162px 287px,179px 280px,191px 271px,203px 264px,213px 251px,220px 230px,236px 207px,251px 193px,269px 182px,290px 176px,310px 171px,317px 152px,299px 140px,278px 148px,256px 157px,232px 173px,217px 188px,199px 212px,182px 238px,166px 254px,146px 259px,127px 253px,113px 229px,118px 207px,124px 188px,142px 178px,148px 168px,136px 166px,149px 162px,153px 147px,136px 145px,153px 141px,155px 124px,140px 123px,156px 117px,158px 102px,146px 104px,158px 97px,166px 89px,161px 83px,167px 79px,175px 76px,185px 87px,187px 101px,200px 108px,216px 101px,225px 98px,235px 97px,236px 87px,230px 81px,223px 76px,213px 68px,195px 44px,196px 29px,191px 20px,179px 8px,143px 9px,126px 19px,113px 36px,119px 52px,106px 61px);
+}
+button:nth-child(2):hover ~ .shape {
+    -webkit-clip-path: polygon(91px 28px,69px 24px,85px 57px,56px 17px,32px 48px,69px 81px,27px 55px,13px 86px,46px 105px,17px 96px,21px 99px,11px 98px,9px 118px,3px 132px,25px 139px,2px 143px,7px 186px,34px 187px,9px 197px,42px 199px,12px 206px,18px 229px,76px 211px,80px 226px,87px 246px,89px 261px,102px 277px,120px 286px,143px 288px,163px 288px,180px 281px,192px 272px,205px 265px,215px 252px,224px 231px,238px 208px,253px 197px,272px 192px,291px 196px,314px 190px,323px 170px,306px 159px,281px 161px,259px 164px,233px 174px,218px 189px,200px 213px,183px 239px,167px 255px,147px 260px,128px 254px,114px 230px,119px 208px,125px 189px,148px 179px,157px 167px,129px 168px,155px 162px,159px 145px,133px 147px,157px 139px,159px 124px,135px 125px,160px 119px,162px 103px,140px 108px,164px 96px,167px 90px,162px 84px,168px 80px,179px 75px,204px 93px,214px 101px,225px 104px,231px 103px,232px 96px,241px 94px,249px 91px,251px 77px,244px 71px,231px 71px,201px 46px,206px 36px,198px 26px,178px 13px,151px 10px,132px 19px,126px 39px,120px 53px,107px 62px);
+}
+button:nth-child(3):hover ~ .shape {
+    -webkit-clip-path: polygon(91px 28px,69px 24px,85px 57px,56px 17px,32px 48px,69px 81px,27px 55px,13px 86px,46px 105px,17px 96px,21px 99px,11px 98px,9px 118px,3px 132px,25px 139px,2px 143px,7px 186px,34px 187px,9px 197px,42px 199px,12px 206px,18px 229px,76px 211px,80px 226px,83px 246px,86px 260px,99px 278px,116px 288px,137px 292px,159px 289px,178px 285px,195px 275px,209px 266px,218px 254px,227px 232px,238px 208px,253px 197px,272px 202px,291px 207px,314px 207px,319px 187px,306px 174px,280px 172px,256px 170px,233px 174px,218px 189px,200px 213px,183px 239px,165px 255px,144px 265px,123px 255px,114px 230px,119px 208px,125px 189px,148px 179px,157px 167px,129px 168px,155px 162px,159px 145px,133px 147px,157px 139px,159px 124px,135px 125px,160px 119px,162px 103px,140px 108px,164px 96px,167px 90px,162px 84px,168px 80px,178px 78px,204px 95px,212px 106px,221px 109px,228px 104px,230px 97px,237px 96px,246px 94px,247px 80px,242px 74px,231px 73px,200px 48px,206px 39px,199px 29px,182px 19px,154px 11px,136px 19px,129px 38px,120px 53px,107px 62px);
+}
+button:nth-child(4):hover ~ .shape {
+    -webkit-clip-path: polygon(96px 35px,74px 26px,84px 56px,63px 18px,45px 45px,68px 80px,38px 53px,26px 81px,45px 104px,18px 94px,27px 95px,17px 97px,18px 117px,18px 131px,28px 138px,16px 142px,21px 180px,33px 186px,22px 195px,41px 198px,27px 204px,38px 218px,75px 210px,79px 225px,86px 245px,88px 260px,101px 276px,119px 285px,141px 288px,162px 289px,184px 287px,201px 283px,215px 277px,234px 268px,247px 256px,258px 241px,274px 230px,288px 226px,303px 231px,322px 238px,329px 220px,318px 205px,300px 195px,283px 195px,259px 202px,234px 225px,209px 246px,188px 254px,169px 258px,146px 259px,127px 253px,113px 229px,118px 207px,124px 188px,142px 178px,148px 168px,136px 166px,149px 162px,153px 147px,136px 145px,153px 141px,155px 124px,140px 123px,156px 117px,158px 102px,146px 104px,158px 97px,166px 89px,161px 83px,167px 79px,175px 76px,181px 88px,183px 101px,194px 110px,210px 107px,223px 103px,232px 96px,228px 88px,226px 84px,219px 77px,205px 64px,195px 44px,198px 29px,191px 20px,179px 8px,143px 9px,126px 19px,110px 40px,119px 52px,106px 61px);
+}
+@keyframes float {
+    0% {
+        transform: translateY(0) rotateX(0);
+    }
+    50% {
+        transform: translateY(-20px) rotateX(3deg);
+    }
+    100% {
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
