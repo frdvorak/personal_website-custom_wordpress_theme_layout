@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    body {
+      background: black;
+     color: #ffbe00;
+      font-family: sans-serif;
+      font-size: 5vw;
+      line-height: 1.3;
+      overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  perspective: 380px;
+  perspective-origin: bottom;
+  position: absolute;
+  top: 0;
+  bottom: 0; left: 0; right: 0;
+  overflow: visible;
+  transform: scaleY(0.9);
+}
+
+.credits {
+  position: absolute;
+  top: 0; left: 13%; right: 13%;
+  height: 100%;
+  animation: play 100s infinite;
+}
+
+.headings {
+  margin-bottom: 5rem;
+}
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+h2 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+p {
+  padding: 0.5em 0;
+}
+
+@keyframes play {
+    0% {transform: rotateX(21deg) translate3d(0,100rem,0); opacity: 1;}
+    85% { opacity: 1;}
+    100% {transform: rotateX(21deg) translate3d(0, -150rem,0); opacity: 0;}
+}
+
+
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+          <div class="credits">
+            <div class="headings">
+                <h1>Frank's Laboratory<h1>
+                <h2>CREATIVE CODING TUTORIALS</h2>
+            </div>
+        
+              <p>Hi everyone. I’m trying a new format, a quick 5 minute CSS tutorials. I want to make couple of Star Wars inspired coding tutorials this month to celebrate 3 big Star Wars releases coming to us this and next month. In this video we will code the opening crawl credits from the last Jedi, in the next tutorial I want to create a small video game, I have 2 or 3 different JavaScript games in mind, I’m still deciding on details.</p>
+      
+              <p>You can watch my other CSS tutorials if you want to improve your frontend coding skills, I also have a bunch of pure vanilla JavaScript animation tutorials if you want something a bit more complex and exciting. Don’t forget to like the video, subscribe and click the bell icon, you know the drill, this will be a quick one, lets start.
+              </p>
+            </div>
+      </div>
+    
+</body>
+
+<script>
+
+</script>
+</html>
